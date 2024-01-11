@@ -1,0 +1,10 @@
+source "https://rubygems.org"
+
+gem "appium_capybara"
+gem "appium_lib"
+gem "capybara"
+gem "rake"
+gem "rspec"
+gem "rubocop"
+gem "ruby-lsp"
+gem "site_prism"
