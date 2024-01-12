@@ -11,8 +11,8 @@ require_relative "hooks"
 caps = {
   "platformName" => "Android",
   "deviceName" => "emulator",
-  "appium:app" => "./app/SauceLabs.apk",
-  "appium:appActivity" => "com.swaglabsmobileapp.MainActivity"
+  "appium:app" => "./app/VodQA.apk",
+  "appium:appActivity" => "com.vodqareactnative.MainActivity"
 }
 
 Capybara.register_driver(:appium) do |app|

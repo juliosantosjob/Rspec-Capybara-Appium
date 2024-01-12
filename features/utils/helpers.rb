@@ -1,3 +1,4 @@
+require_relative "../support/env"
 require_relative "../support/hooks"
 
 module Helper
