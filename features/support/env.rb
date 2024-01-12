@@ -19,5 +19,8 @@ Capybara.register_driver(:appium) do |app|
   Appium::Capybara::Driver.new app, caps: caps, appium_lib: { server_url: "http://localhost:4723/wd/hub" }
 end
 
-Capybara.default_driver = :appium
-Capybara.default_max_wait_time = 20
+Capybara.configure do |config|
+  include RSpec::Matchers
+  config.default_max_wait_time = 20
+  config.default_driver = :appium
+end
