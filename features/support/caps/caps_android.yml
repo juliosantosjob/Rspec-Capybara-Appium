@@ -1,0 +1,8 @@
+caps:
+  platformName: 'Android'
+  deviceName: 'emulator'
+  appium:app: './app/VodQA.apk'
+  appium:appActivity: 'com.vodqareactnative.MainActivity'
+
+appium_lib:
+  server_url: 'http://localhost:4723/wd/hub'

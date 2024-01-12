@@ -5,18 +5,16 @@ require "appium_capybara"
 require "site_prism"
 require "rubocop"
 require "ruby-lsp"
-
+require "yaml"
 require_relative "hooks"
 
-caps = {
-  "platformName" => "Android",
-  "deviceName" => "emulator",
-  "appium:app" => "./app/VodQA.apk",
-  "appium:appActivity" => "com.vodqareactnative.MainActivity"
-}
+appium_caps = YAML.load_file("features/support/caps/caps_android.yml")
+
+caps = appium_caps["caps"]
+appium_lib = appium_caps["appium_lib"]
 
 Capybara.register_driver(:appium) do |app|
-  Appium::Capybara::Driver.new app, caps: caps, appium_lib: { server_url: "http://localhost:4723/wd/hub" }
+  Appium::Capybara::Driver.new app, caps: caps, appium_lib: appium_lib
 end
 
 Capybara.configure do |config|
