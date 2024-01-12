@@ -1,8 +1,8 @@
-require_relative "../screens/login_screen"
+require_relative "../actions/login_action"
 
 RSpec.describe "Login user" do
   before(:each) do
-    @login = LoginScreen.new
+    @login = LoginActions.new
   end
 
   it "Login - Happy path", :login do

@@ -12,7 +12,7 @@ module Helper
     end
   end
 
-  def wait_and_click(locator, timeout)
+  def wait_and_tap(locator, timeout)
     wait_for_element(locator, timeout)
     begin
       locator.click
@@ -21,8 +21,9 @@ module Helper
     end
   end
 
-  def fill(locator, valor)
+  def fill_value(locator, valor)
     begin
+      wait_for_element(locator)
       locator.set(valor)
     rescue => e
       puts "Error filling element. Original error: #{e.message}"

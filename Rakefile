@@ -8,5 +8,4 @@ end
 
 task :regression do
   sh "rspec features/specs"
-  # example: rspec features/specs -t @two_empty
 end
