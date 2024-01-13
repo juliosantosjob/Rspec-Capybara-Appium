@@ -10,4 +10,16 @@ RSpec.describe "Login user" do
     @login.fill("admin", "admin")
     @login.app_is_open
   end
+
+  it "Login - Invalid Credentials - Username error", :invalid_username do
+    @login.go_app
+    @login.fill("a", "admin")
+    @login.error_msg("Invalid  Credentials")
+  end
+
+  it "Login - Invalid Credentials - Password error", :invalid_password do
+    @login.go_app
+    @login.fill("admin", "a")
+    @login.error_msg("Invalid  Credentials")
+  end
 end
