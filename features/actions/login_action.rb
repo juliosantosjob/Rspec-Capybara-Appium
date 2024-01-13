@@ -21,7 +21,7 @@ class LoginActions < LoginScreen
   end
 
   def error_msg(msg)
-    expect(error_message.text).to eq(msg)
-    expect(error_message.visible?).to be_truthy
+    expect(msg_error.text).to eq(msg)
+    expect(msg_error.visible?).to be_truthy
   end
 end

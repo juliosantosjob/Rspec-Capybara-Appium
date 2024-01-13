@@ -5,5 +5,5 @@ class LoginScreen < SitePrism::Page
   element :fld_username, :accessibility_id, "username"
   element :fld_password, :accessibility_id, "password"
   element :fld_samples_list, :xpath, "//*[contains(@text,'Samples List')]"
-  element :error_message, :id, "android:id/message"
+  element :msg_error, :id, "android:id/message"
 end
