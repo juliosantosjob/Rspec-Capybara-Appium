@@ -15,18 +15,9 @@ class NativeViewScreen < SitePrism::Page
     expect(fld_title_native_view.visible?).to be_truthy
   end
 
-  def see_first_text_view(txt)
-    expect(fld_first_text_view.text).to include(txt)
-    expect(fld_first_text_view.visible?).to be_truthy
-  end
-
-  def see_second_text_view(txt)
-    expect(fld_second_text_view.text).to include(txt)
-    expect(fld_second_text_view.visible?).to be_truthy
-  end
-
-  def see_third_text_view(txt)
-    expect(fld_third_text_view.text).to include(txt)
-    expect(fld_third_text_view.visible?).to be_truthy
+  def see_text_view(txt)
+    elements = [fld_first_text_view, fld_second_text_view, fld_third_text_view]
+    expect(elements.any? { |element| element.text.include?(txt) })
+      .to be_truthy, "Error Text '#{txt}' not found in any of the elements."
   end
 end

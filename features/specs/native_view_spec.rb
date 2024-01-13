@@ -6,8 +6,8 @@ RSpec.describe "Native view demo", :regression do
     @login.fill("admin", "admin")
     @login.at_home
     @native_view.go_native_view_screen
-    @native_view.see_first_text_view("Hello World, I'm View one")
-    @native_view.see_second_text_view("Hello World, I'm View two")
-    @native_view.see_third_text_view("Hello World, I'm View three")
+    @native_view.see_text_view("Hello World, I'm View one")
+    @native_view.see_text_view("Hello World, I'm View two")
+    @native_view.see_text_view("Hello World, I'm View three")
   end
 end
