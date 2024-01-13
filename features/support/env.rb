@@ -8,11 +8,11 @@ require "ruby-lsp"
 require "yaml"
 require_relative "hooks"
 
-Capybara.register_driver(:appium) do |app|
-  appium_caps = YAML.load_file("features/support/caps/caps_android.yml")
-  caps = appium_caps["caps"]
-  appium_lib = appium_caps["appium_lib"]
+appium_caps = YAML.load_file("features/support/caps/caps_android.yml")
+caps = appium_caps["caps"]
+appium_lib = appium_caps["appium_lib"]
 
+Capybara.register_driver(:appium) do |app|
   Appium::Capybara::Driver.new app, caps: caps, appium_lib: appium_lib
 end
 

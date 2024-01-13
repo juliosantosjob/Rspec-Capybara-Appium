@@ -1,5 +1,32 @@
 require_relative "../support/env"
+require_relative "../utils/helpers"
 
 class NativeViewScreen < SitePrism::Page
-  element :chained_view, :xpath, "//*[@content-desc='chainedView']", :text => "Native View"
+  include Helper
+
+  element :btn_chained_view, :xpath, "//*[@content-desc='chainedView']", :text => "Native View"
+  element :fld_title_native_view, :xpath, "//*[contains(@text,'Native View Demo')]"
+  element :fld_first_text_view, :xpath, "(//android.widget.TextView[@content-desc='textView'])[1]"
+  element :fld_second_text_view, :xpath, "(//android.widget.TextView[@content-desc='textView'])[2]"
+  element :fld_third_text_view, :xpath, "(//android.widget.TextView[@content-desc='textView'])[3]"
+
+  def go_native_view_screen
+    wait_and_tap(btn_chained_view, 5)
+    expect(fld_title_native_view.visible?).to be_truthy
+  end
+
+  def see_first_text_view(txt)
+    expect(fld_first_text_view.text).to include(txt)
+    expect(fld_first_text_view.visible?).to be_truthy
+  end
+
+  def see_second_text_view(txt)
+    expect(fld_second_text_view.text).to include(txt)
+    expect(fld_second_text_view.visible?).to be_truthy
+  end
+
+  def see_third_text_view(txt)
+    expect(fld_third_text_view.text).to include(txt)
+    expect(fld_third_text_view.visible?).to be_truthy
+  end
 end

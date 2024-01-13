@@ -1,4 +1,4 @@
-require_relative "../actions/login_action"
+require_relative "../screens/login_screen"
 
 RSpec.describe "User Login", :login_regression, :regression do
   it "Login - Happy path", :login do
