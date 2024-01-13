@@ -15,7 +15,7 @@ class LoginActions < LoginScreen
     wait_and_tap(btn_login, 5)
   end
 
-  def app_is_open
+  def at_home
     element = fld_samples_list.visible?
     expect(element).to be_truthy
   end

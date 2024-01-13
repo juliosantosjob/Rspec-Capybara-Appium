@@ -1,25 +1,27 @@
 require_relative "../actions/login_action"
 
-RSpec.describe "Login user" do
-  before(:each) do
-    @login = LoginActions.new
-  end
-
+RSpec.describe "User Login", :login_regression, :regression do
   it "Login - Happy path", :login do
     @login.go_app
     @login.fill("admin", "admin")
-    @login.app_is_open
+    @login.at_home
   end
 
-  it "Login - Invalid Credentials - Username error", :invalid_username do
+  it "Login - Invalid username credential", :invalid_username do
     @login.go_app
-    @login.fill("a", "admin")
+    @login.fill("invalid", "admin")
     @login.error_msg("Invalid  Credentials")
   end
 
-  it "Login - Invalid Credentials - Password error", :invalid_password do
+  it "Login - Invalid password credential", :invalid_password do
     @login.go_app
-    @login.fill("admin", "a")
+    @login.fill("admin", "invalid")
     @login.error_msg("Invalid  Credentials")
+  end
+
+  it "Login - Empty credentials", :two_empty do
+    @login.go_app
+    @login.fill("", "")
+    @login.error_msg("Please enter Username or password")
   end
 end
