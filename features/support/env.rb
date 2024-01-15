@@ -7,6 +7,7 @@ require "rubocop"
 require "ruby-lsp"
 require "yaml"
 require_relative "hooks"
+require_relative "instances"
 
 appium_caps = YAML.load_file("features/support/caps/caps_android.yml")
 caps = appium_caps["caps"]
