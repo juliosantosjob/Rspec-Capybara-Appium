@@ -2,7 +2,7 @@ require_relative "env"
 
 RSpec.configure do |config|
   config.before(:each) do
-    Capybara.current_session.driver.appium_driver
+    @driver = Capybara.current_session.driver.appium_driver
   end
 
   config.after(:each) do

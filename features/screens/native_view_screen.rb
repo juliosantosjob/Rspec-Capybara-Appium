@@ -10,7 +10,7 @@ class NativeViewScreen < SitePrism::Page
   element :fld_second_text_view, :xpath, "(//android.widget.TextView[@content-desc='textView'])[2]"
   element :fld_third_text_view, :xpath, "(//android.widget.TextView[@content-desc='textView'])[3]"
 
-  def go_native_view_screen
+  def access_native_view_screen
     wait_and_tap(btn_chained_view, 5)
     expect(fld_title_native_view.visible?).to be_truthy
   end
