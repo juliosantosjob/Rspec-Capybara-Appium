@@ -1,0 +1,2 @@
+features/specs --format html
+--out reports/rspec_results.html
