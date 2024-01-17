@@ -1,7 +1,10 @@
+require "rspec"
 require_relative "../support/env"
 require_relative "../utils/helpers"
 
 class NativeViewScreen < SitePrism::Page
+  include Capybara::DSL
+  include RSpec::Matchers
   include Helper
 
   element :btn_chained_view, :xpath, "//*[@content-desc='chainedView']", :text => "Native View"
@@ -21,7 +24,7 @@ class NativeViewScreen < SitePrism::Page
       fld_second_text_view,
       fld_third_text_view
     ]
-    text_view = all_elements.find { |element| element.text.eq(txt) }
+    text_view = all_elements.find { |element| element.text.include?(txt) }
     expect(text_view).to be_truthy
   end
 end

@@ -2,12 +2,14 @@ require_relative "../support/env"
 require_relative "../support/hooks"
 
 module Helper
+
   # Method for waiting until a web element is present on the page
   #
   # @param locator [Element] Object to locate the web element (accessibility_id, XPath, ID, etc.).
   # @param timeout [Integer] Timeout duration in seconds. Default: 5 seconds.
   #
   # Example: wait_for_element("element_id", 5)
+
   def wait_for_element(locator, timeout = 5)
     wait = Selenium::WebDriver::Wait.new(timeout: timeout)
 

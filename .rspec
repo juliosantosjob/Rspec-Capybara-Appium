@@ -1,2 +1,2 @@
-features/specs --format html
---out reports/rspec_results.html
+--format html
+--out logs/rspec_results.html
