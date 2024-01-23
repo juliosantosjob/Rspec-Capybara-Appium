@@ -8,7 +8,6 @@ class SliderScreen < SitePrism::Page
 
   element :btn_slider, :xpath, "//android.widget.TextView[@content-desc='slider1']"
   element :fld_title_slider, :xpath, "//*[contains(@text,'Slider')]"
-  element :slc_slider_one, :accessibility_id, "slider"
 
   def go_slider_screen
     wait_and_tap(btn_slider, 5)
@@ -16,8 +15,20 @@ class SliderScreen < SitePrism::Page
   end
 
   def swipe_one
-    puts $driver.find_element(:accessibility_id, "slider").location.x
+    element = $driver.find_element(:accessibility_id, "slider")
 
-    # Appium::Core::TouchAction.new.press(x: 0, y: 0).wait(1000).move_to(x: 0, y: 0).release.perform
+    puts "altura: #{$driver.window_size.width}"
+    puts "largura: #{$driver.window_size.height}"
+
+    Capybara.current_session.driver.swipe(
+      :start_x => element.location.x,
+      :start_y => element.location.y,
+      :end_x => $driver.window_size.height,
+      :end_y => element.location.y,
+      :duration => 2000
+    )
+
+    txt_element = find(:xpath, "(//*[contains(@text,'100')])[2]")
+    expect(txt_element.visible?).to be_truthy
   end
 end
