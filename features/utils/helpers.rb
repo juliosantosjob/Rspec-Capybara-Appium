@@ -49,4 +49,14 @@ module Helper
       puts "Error filling element. Original error: #{e.message}"
     end
   end
+
+  def swipe(element)
+    Capybara.current_session.driver.swipe(
+      :start_x => element.location.x,
+      :start_y => element.location.y,
+      :end_x => $driver.window_size.height,
+      :end_y => element.location.y,
+      :duration => 2000
+    )
+  end
 end

@@ -15,20 +15,17 @@ class SliderScreen < SitePrism::Page
   end
 
   def swipe_one
-    element = $driver.find_element(:accessibility_id, "slider")
+    element_slider_one = $driver.find_element(:accessibility_id, "slider")
+    swipe(element_slider_one)
+  end
 
-    puts "altura: #{$driver.window_size.width}"
-    puts "largura: #{$driver.window_size.height}"
+  def swipe_two
+    element_slider_two = $driver.find_element(:accessibility_id, "slider1")
+    swipe(element_slider_two)
+  end
 
-    Capybara.current_session.driver.swipe(
-      :start_x => element.location.x,
-      :start_y => element.location.y,
-      :end_x => $driver.window_size.height,
-      :end_y => element.location.y,
-      :duration => 2000
-    )
-
-    txt_element = find(:xpath, "(//*[contains(@text,'100')])[2]")
+  def position_slider(arg)
+    txt_element = find(:xpath, "(//*[contains(@text,'#{arg}')])[2]")
     expect(txt_element.visible?).to be_truthy
   end
 end
