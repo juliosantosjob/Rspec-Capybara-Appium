@@ -1,8 +1,6 @@
 require_relative "../support/env"
-require_relative "../support/hooks"
 
 module Helper
-
   # Method for waiting until a web element is present on the page
   #
   # @param locator [Element] Object to locate the web element (accessibility_id, XPath, ID, etc.).

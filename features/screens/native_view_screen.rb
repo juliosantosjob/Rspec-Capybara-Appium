@@ -1,4 +1,3 @@
-require "rspec"
 require_relative "../support/env"
 require_relative "../utils/helpers"
 

@@ -1,9 +1,9 @@
+require "rspec"
 require "appium_capybara"
 require "appium_lib"
 require "site_prism"
 require "rubocop"
 require "yaml"
-require_relative "hooks"
 require_relative "instances"
 
 desired_caps = YAML.load_file("features/support/caps/caps_android.yml")
@@ -17,4 +17,14 @@ end
 Capybara.configure do |config|
   config.default_max_wait_time = 10
   config.default_driver = :appium
+end
+
+RSpec.configure do |config|
+  config.before(:each) do
+    $driver = Capybara.current_session.driver.appium_driver
+  end
+
+  config.after(:each) do
+    Capybara.current_session.driver.quit
+  end
 end

@@ -2,8 +2,13 @@ require "rake"
 require "httparty"
 require "rspec/core/rake_task"
 
+desc "Exec project"
+task :run, [:tag] do |task, args|
+  sh "rspec features/specs -t #{args.tag}" #--> example of how to use: rake run[login]
+end
+
 desc "Auto-correct code"
-task :auto_correct do
+task :rubo do
   sh "rubocop --auto-correct"
 end
 
