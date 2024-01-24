@@ -50,13 +50,30 @@ module Helper
     end
   end
 
-  def swipe(element)
+  # @param element [Capybara::Node::Element] The web element on which the swipe gesture will be performed.
+  # @param timeout [Integer] (default: 2500) Duration of the swipe gesture in milliseconds.
+  #
+  # This method calculates the starting position (x, y) of the given web element
+  # and performs a swipe gesture from that position to the right edge of the screen.
+  #
+  # Example:
+  #   element = $driver.find_element(:xpath, "your_element_selector")
+  #   swipe(element, timeout: 3000)
+  #
+
+  def swipe(element, timeout = 2500)
+    postion_x = element.location.x
+    postion_y = element.location.y
+
+    screen_height = $driver.window_size.height
+    # screen_width = $driver.window_size.width
+
     Capybara.current_session.driver.swipe(
-      :start_x => element.location.x,
-      :start_y => element.location.y,
-      :end_x => $driver.window_size.height,
-      :end_y => element.location.y,
-      :duration => 2000
+      :start_x => postion_x,
+      :start_y => postion_y,
+      :end_x => screen_height,
+      :end_y => postion_y,
+      :duration => timeout
     )
   end
 end

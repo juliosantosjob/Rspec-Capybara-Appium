@@ -8,6 +8,7 @@ class SliderScreen < SitePrism::Page
 
   element :btn_slider, :xpath, "//android.widget.TextView[@content-desc='slider1']"
   element :fld_title_slider, :xpath, "//*[contains(@text,'Slider')]"
+  element :fld_end_slider, :xpath, "(//*[@text='100'])[2]"
 
   def go_slider_screen
     wait_and_tap(btn_slider, 5)
@@ -24,8 +25,7 @@ class SliderScreen < SitePrism::Page
     swipe(element_slider_two)
   end
 
-  def position_slider(arg)
-    txt_element = find(:xpath, "(//*[contains(@text,'#{arg}')])[2]")
-    expect(txt_element.visible?).to be_truthy
+  def end_of_slide
+    expect(fld_end_slider.visible?).to be_truthy
   end
 end
