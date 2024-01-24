@@ -16,13 +16,13 @@ class SliderScreen < SitePrism::Page
   end
 
   def swipe_one
-    element_slider_one = $driver.find_element(:accessibility_id, "slider")
-    swipe(element_slider_one)
+    slider_one = $driver.find_element(:accessibility_id, "slider")
+    do_swipe(slider_one, "screen_right")
   end
 
   def swipe_two
-    element_slider_two = $driver.find_element(:accessibility_id, "slider1")
-    swipe(element_slider_two)
+    slider_two = $driver.find_element(:accessibility_id, "slider1")
+    do_swipe(slider_two, "screen_right")
   end
 
   def end_of_slide

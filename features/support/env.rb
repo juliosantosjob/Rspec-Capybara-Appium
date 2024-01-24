@@ -4,6 +4,7 @@ require "appium_lib"
 require "site_prism"
 require "rubocop"
 require "yaml"
+require_relative "hooks"
 require_relative "instances"
 
 desired_caps = YAML.load_file("features/support/caps/caps_android.yml")

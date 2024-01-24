@@ -2,7 +2,6 @@ require_relative "../screens/slider_screen"
 
 RSpec.describe "Slider", :regression, :regression_slider do
   before do
-    # App authentication
     @login.go_app
     @login.fill("admin", "admin")
     @login.at_home

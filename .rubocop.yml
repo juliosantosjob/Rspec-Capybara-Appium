@@ -48,3 +48,13 @@ Style/RedundantReturn:
 
 convention:Layout/LineLength:
   Enabled: false
+
+convention:Style/TrailingCommaInArguments:
+  Enabled: false
+
+
+convention:Naming/AccessorMethodName: 
+  Enabled: false
+
+convention:Naming/PredicateName:
+  Enabled: false

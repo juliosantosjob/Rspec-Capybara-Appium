@@ -4,7 +4,6 @@ RSpec.describe "Native view demo", :regression do
   let(:text_views) { YAML.load_file("constants/data.yml")["native_views"].values }
 
   before do
-    # App authentication
     @login.go_app
     @login.fill("admin", "admin")
     @login.at_home

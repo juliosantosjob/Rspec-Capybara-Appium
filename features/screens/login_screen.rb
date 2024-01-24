@@ -7,7 +7,7 @@ class LoginScreen < SitePrism::Page
   include RSpec::Matchers
   include Helper
 
-  element :btn_login, :xpath, "//*[@content-desc='login']/android.widget.Button/android.widget.TextView", text: "LOG IN"
+  element :btn_login, :accessibility_id, "login"
   element :fld_username, :accessibility_id, "username"
   element :fld_password, :accessibility_id, "password"
   element :fld_samples_list, :xpath, "//*[contains(@text,'Samples List')]"
