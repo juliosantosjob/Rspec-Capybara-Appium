@@ -29,12 +29,20 @@ module Helper
     end
   end
 
+  def assert_visible(element)
+    raise "Element is not visible." unless expect(element.visible?).to be_truthy
+  end
+
+  def assert_text(element, text)
+    raise "Element text does not match expected text." unless expect(element.text).to eq(text)
+  end
+
   def get_screen_size
     $driver.window_size
   end
 
-  def do_swipe(element_init, direction, element_end: nil, timeout: 2500)
-    raise ArgumentError, "Enter a valid direction" unless
+  def do_swipe(element_init, direction, timeout: 2500)
+    raise ArgumentError, "Enter a valid direction!" unless
       %w[
         screen_up
         screen_down
@@ -42,34 +50,26 @@ module Helper
         screen_right
       ].include?(direction)
 
-    # X -> horizontal   get_screen_size.width  -> largura
-    # Y -> vertical     get_screen_size.height -> altura
+    x = element_init.location["x"]
+    y = element_init.location["y"]
 
     case direction
     when "screen_up"
-      x = element_init.location["x"]
-      y = element_init.location["y"]
-
       x_ = element_init.location["x"]
-      z_ = 0
+      y_ = get_screen_size.height
+
     when "screen_down"
-      x = element_init.location["x"]
-      y = element_init.location["y"]
-
       x_ = element_init.location["x"]
-      z_ = get_screen_size.height
+      y_ = 0
+
     when "screen_left"
-      x = element_init.location["x"]
-      y = element_init.location["y"]
-
       x_ = 0
-      z_ = element_init.location["y"]
-    when "screen_right"
-      x = element_init.location["x"]
-      y = element_init.location["y"]
+      y_ = element_init.location["y"]
 
+    when "screen_right"
       x_ = get_screen_size.width
-      z_ = element_init.location["y"]
+      y_ = element_init.location["y"]
+
     else
       raise ArgumentError, "invalid direction: #{direction}"
     end
@@ -78,8 +78,11 @@ module Helper
       :start_x => x,
       :start_y => y,
       :end_x => x_,
-      :end_y => z_,
+      :end_y => y_,
       :duration => timeout,
     )
   end
 end
+
+# X - width - Largura
+# Y - height - Altura

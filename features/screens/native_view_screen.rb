@@ -6,7 +6,7 @@ class NativeViewScreen < SitePrism::Page
   include RSpec::Matchers
   include Helper
 
-  element :btn_chained_view, :xpath, "//*[@content-desc='chainedView']", :text => "Native View"
+  element :btn_chained_view, :xpath, "//android.widget.TextView[@content-desc='chainedView']"
   element :fld_title_native_view, :xpath, "//*[contains(@text,'Native View Demo')]"
   element :fld_first_text_view, :xpath, "(//android.widget.TextView[@content-desc='textView'])[1]"
   element :fld_second_text_view, :xpath, "(//android.widget.TextView[@content-desc='textView'])[2]"
@@ -14,7 +14,7 @@ class NativeViewScreen < SitePrism::Page
 
   def access_native_view_screen
     wait_and_tap(btn_chained_view, 5)
-    expect(fld_title_native_view.visible?).to be_truthy
+    assert_visible(fld_title_native_view)
   end
 
   def see_text_view(txt)
@@ -24,6 +24,6 @@ class NativeViewScreen < SitePrism::Page
       fld_third_text_view
     ]
     text_view = all_elements.find { |element| element.text.include?(txt) }
-    expect(text_view).to be_truthy
+    assert_visible(text_view)
   end
 end

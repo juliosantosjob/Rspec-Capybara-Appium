@@ -1,4 +1,3 @@
-require "rspec"
 require_relative "../support/env"
 require_relative "../utils/helpers"
 
@@ -14,7 +13,7 @@ class LoginScreen < SitePrism::Page
   element :msg_error, :id, "android:id/message"
 
   def go_app
-    expect(btn_login.visible?).to be_truthy
+    assert_visible(btn_login)
   end
 
   def fill(username, password)
@@ -24,11 +23,11 @@ class LoginScreen < SitePrism::Page
   end
 
   def at_home
-    expect(fld_samples_list.visible?).to be_truthy
+    assert_visible(fld_samples_list)
   end
 
   def error_msg(msg)
-    expect(msg_error.text).to eq(msg)
-    expect(msg_error.visible?).to be_truthy
+    assert_text(msg_error, msg)
+    assert_visible(msg_error)
   end
 end

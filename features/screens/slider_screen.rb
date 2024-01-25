@@ -12,7 +12,7 @@ class SliderScreen < SitePrism::Page
 
   def go_slider_screen
     wait_and_tap(btn_slider, 5)
-    expect(fld_title_slider.visible?).to be_truthy
+    assert_visible(fld_title_slider)
   end
 
   def swipe_one
@@ -26,6 +26,6 @@ class SliderScreen < SitePrism::Page
   end
 
   def end_of_slide
-    expect(fld_end_slider.visible?).to be_truthy
+    assert_visible(fld_end_slider)
   end
 end

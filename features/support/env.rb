@@ -4,6 +4,7 @@ require "appium_lib"
 require "site_prism"
 require "rubocop"
 require "yaml"
+require "ruby-lsp"
 require_relative "hooks"
 require_relative "instances"
 

@@ -103,7 +103,6 @@ GEM
       sorbet-runtime (>= 0.5.10782)
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
-    rufo (0.17.0)
     selenium-webdriver (4.15.0)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
@@ -138,7 +137,6 @@ DEPENDENCIES
   rspec_tesults_formatter
   rubocop
   ruby-lsp
-  rufo
   site_prism
   yaml
 
