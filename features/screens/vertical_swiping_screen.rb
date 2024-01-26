@@ -2,8 +2,6 @@ require_relative "../support/env"
 require_relative "../utils/helpers"
 
 class VerticalSwipingScreen < SitePrism::Page
-  include Capybara::DSL
-  include RSpec::Matchers
   include Helper
   data = YAML.load_file("constants/data.yml")["vertical_swipe_list"].values
   @random_framework = data[rand(data.length)]

@@ -2,8 +2,6 @@ require_relative "../support/env"
 require_relative "../utils/helpers"
 
 class NativeViewScreen < SitePrism::Page
-  include Capybara::DSL
-  include RSpec::Matchers
   include Helper
 
   element :btn_chained_view, :xpath, "//android.widget.TextView[@content-desc='chainedView']"

@@ -2,8 +2,6 @@ require_relative "../support/env"
 require_relative "../utils/helpers"
 
 class DragAndDropScreen < SitePrism::Page
-  include Capybara::DSL
-  include RSpec::Matchers
   include Helper
 
   element :btn_drag_and_drop, :xpath, "//android.widget.TextView[@content-desc='dragAndDrop']"

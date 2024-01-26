@@ -2,8 +2,6 @@ require_relative "../support/env"
 require_relative "../utils/helpers"
 
 class SliderScreen < SitePrism::Page
-  include Capybara::DSL
-  include RSpec::Matchers
   include Helper
 
   element :btn_slider, :xpath, "//android.widget.TextView[@content-desc='slider1']"

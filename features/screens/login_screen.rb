@@ -2,8 +2,6 @@ require_relative "../support/env"
 require_relative "../utils/helpers"
 
 class LoginScreen < SitePrism::Page
-  include Capybara::DSL
-  include RSpec::Matchers
   include Helper
 
   element :btn_login, :accessibility_id, "login"
