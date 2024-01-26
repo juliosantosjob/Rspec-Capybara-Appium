@@ -60,3 +60,6 @@ convention:Naming/PredicateName:
 
 convention:Style/GuardClause:
   Enabled: false
+
+convention:Metrics/BlockLength:
+  Enabled: false

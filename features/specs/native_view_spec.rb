@@ -9,7 +9,7 @@ RSpec.describe "Native view demo", :regression do
     @login.at_home
   end
 
-  it "Native view - checking native text", :native_text do
+  it "Checking native text", :native_text do
     @native_view.access_native_view_screen
     text_views.each do |expect_text_view|
       @native_view.see_text_view(expect_text_view)

@@ -8,25 +8,31 @@ RSpec.describe "User Login", :regression, :login_regression do
     @password = user_data["password"]
   end
 
-  it "Login - Happy path", :login do
+  it "Happy path", :login do
     @login.go_app
     @login.fill(@username, @password)
     @login.at_home
   end
 
-  it "Login - Invalid username credential", :invalid_username do
+  it "Invalid username credential", :invalid_username do
     @login.go_app
     @login.fill("invalid", @password)
     @login.error_msg("Invalid  Credentials")
   end
 
-  it "Login - Invalid password credential", :invalid_password do
+  it "Invalid password credential", :invalid_password do
     @login.go_app
     @login.fill(@username, "invalid")
     @login.error_msg("Invalid  Credentials")
   end
 
-  it "Login - Empty credentials", :two_empty do
+  it "Invalid username and password credential", :invalid_password do
+    @login.go_app
+    @login.fill("invalid", "invalid")
+    @login.error_msg("Invalid  Credentials")
+  end
+
+  it "Empty credentials", :two_empty do
     @login.go_app
     @login.fill("", "")
     @login.error_msg("Please enter Username or password")

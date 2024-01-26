@@ -7,14 +7,14 @@ RSpec.describe "Slider", :regression, :regression_slider do
     @login.at_home
   end
 
-  it "Slider - Checking first swipe", :slider_one do
-    @slider.go_slider_screen
+  it "Checking first swipe", :slider_one do
+    @slider.access_slider_screen
     @slider.swipe_one
     @slider.end_of_slide
   end
 
-  it "Slider - Checking second swipe", :slider_two do
-    @slider.go_slider_screen
+  it "Checking second swipe", :slider_two do
+    @slider.access_slider_screen
     @slider.swipe_two
     @slider.end_of_slide
   end

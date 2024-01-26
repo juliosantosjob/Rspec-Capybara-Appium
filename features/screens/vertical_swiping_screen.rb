@@ -12,13 +12,13 @@ class VerticalSwipingScreen < SitePrism::Page
   element :fld_title_vertical_swiping, :xpath, "//*[contains(@text,'Vertical swiping')]"
   element :fld_framework, :xpath, "//android.widget.TextView[@text=' #{@random_framework}']"
 
-  def go_vertical_swiping_screen
+  def access_vertical_swiping_screen
     wait_and_tap(btn_vertical_swiping, 5)
     assert_visible(fld_title_vertical_swiping)
   end
 
-  def perform_vertical_swiping
-    c_sharp_element = driver.find_element(:xpath, "//*[@text=' C#']")
+  def vertical_swipe_success
+    c_sharp_element = Capybara.current_session.driver.appium_driver.find_element(:xpath, "//*[@text=' C#']")
 
     begin
       condition_element = fld_framework.visible?

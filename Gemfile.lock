@@ -137,6 +137,7 @@ DEPENDENCIES
   rspec_tesults_formatter
   rubocop
   ruby-lsp
+  selenium-webdriver
   site_prism
   yaml
 

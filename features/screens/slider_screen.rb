@@ -10,18 +10,18 @@ class SliderScreen < SitePrism::Page
   element :fld_title_slider, :xpath, "//*[contains(@text,'Slider')]"
   element :fld_end_slider, :xpath, "(//*[@text='100'])[2]"
 
-  def go_slider_screen
+  def access_slider_screen
     wait_and_tap(btn_slider, 5)
     assert_visible(fld_title_slider)
   end
 
   def swipe_one
-    slider_one = $driver.find_element(:accessibility_id, "slider")
+    slider_one = Capybara.current_session.driver.appium_driver.find_element(:accessibility_id, "slider")
     do_swipe(slider_one, "screen_right")
   end
 
   def swipe_two
-    slider_two = $driver.find_element(:accessibility_id, "slider1")
+    slider_two = Capybara.current_session.driver.appium_driver.find_element(:accessibility_id, "slider1")
     do_swipe(slider_two, "screen_right")
   end
 
