@@ -52,9 +52,11 @@ convention:Layout/LineLength:
 convention:Style/TrailingCommaInArguments:
   Enabled: false
 
-
 convention:Naming/AccessorMethodName: 
   Enabled: false
 
 convention:Naming/PredicateName:
+  Enabled: false
+
+convention:Style/GuardClause:
   Enabled: false

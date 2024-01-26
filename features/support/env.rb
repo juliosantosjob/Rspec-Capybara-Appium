@@ -20,3 +20,5 @@ Capybara.configure do |config|
   config.default_max_wait_time = 10
   config.default_driver = :appium
 end
+
+# capy_driver = Capybara.current_session.driver.appium_driver

@@ -38,7 +38,7 @@ module Helper
   end
 
   def get_screen_size
-    $driver.window_size
+    Capybara.current_session.driver.appium_driver.window_size
   end
 
   def do_swipe(element_init, direction, timeout: 2500)
@@ -50,36 +50,30 @@ module Helper
         screen_right
       ].include?(direction)
 
-    x = element_init.location["x"]
-    y = element_init.location["y"]
-
     case direction
     when "screen_up"
-      x_ = element_init.location["x"]
-      y_ = get_screen_size.height
+      x = element_init.location["x"]
+      y = get_screen_size.height
 
     when "screen_down"
-      x_ = element_init.location["x"]
-      y_ = 0
+      x = element_init.location["x"]
+      y = 0
 
     when "screen_left"
-      x_ = 0
-      y_ = element_init.location["y"]
+      x = 0
+      y = element_init.location["y"]
 
     when "screen_right"
-      x_ = get_screen_size.width
-      y_ = element_init.location["y"]
-
-    else
-      raise ArgumentError, "invalid direction: #{direction}"
+      x = get_screen_size.width
+      y = element_init.location["y"]
     end
 
     Capybara.current_session.driver.swipe(
-      :start_x => x,
-      :start_y => y,
-      :end_x => x_,
-      :end_y => y_,
-      :duration => timeout,
+      :start_x => element_init.location["x"],
+      :start_y => element_init.location["y"],
+      :end_x => x,
+      :end_y => y,
+      :duration => timeout
     )
   end
 end
