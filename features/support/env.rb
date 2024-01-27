@@ -5,7 +5,6 @@ require "site_prism"
 require "rubocop"
 require "yaml"
 require "ruby-lsp"
-require "selenium-webdriver"
 require_relative "hooks"
 require_relative "instances"
 
@@ -22,6 +21,3 @@ Capybara.configure do |config|
   config.default_driver = :appium
   include RSpec::Matchers
 end
-
-
-$driver = Capybara.current_session.driver.appium_driver

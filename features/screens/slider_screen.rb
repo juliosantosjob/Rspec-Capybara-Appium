@@ -14,12 +14,12 @@ class SliderScreen < SitePrism::Page
   end
 
   def swipe_one
-    slider_one = Capybara.current_session.driver.appium_driver.find_element(:accessibility_id, "slider")
+    slider_one = $driver.find_element :accessibility_id, "slider"
     do_swipe(slider_one, "screen_right")
   end
 
   def swipe_two
-    slider_two = Capybara.current_session.driver.appium_driver.find_element(:accessibility_id, "slider1")
+    slider_two = $driver.find_element :accessibility_id, "slider1"
     do_swipe(slider_two, "screen_right")
   end
 

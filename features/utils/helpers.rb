@@ -1,17 +1,20 @@
 require_relative "../support/env"
+require_relative "../support/hooks"
 
 module Helper
-  def wait_for_element(locator, timeout = 5)
-    wait = Selenium::WebDriver::Wait.new(timeout: timeout)
-
-    begin
-      wait.until { locator }
-    rescue => e
-      raise "Element not found within #{timeout} seconds. Original error: #{e.message}"
+  def wait_for_element(locator, count = 10)
+    init = 0
+    until init == count
+      begin
+        break if locator.visible? == true
+      rescue
+        raise ArgumentError, "Unable to find the element #{elem} in #{count * 10} secs" if init == count - 1
+      end
+      init += 1
     end
   end
 
-  def wait_and_tap(locator, timeout = 5)
+  def wait_and_tap(locator, timeout = 10)
     wait_for_element(locator, timeout)
     begin
       locator.click
@@ -29,12 +32,12 @@ module Helper
     end
   end
 
-  def assert_visible(element)
-    raise "Element is not visible." unless expect(element.visible?).to be_truthy
+  def assert_visible(locator)
+    raise "Element is not visible." unless expect(locator.visible?).to be_truthy
   end
 
-  def assert_text(element, text)
-    raise "Element text does not match expected text." unless expect(element.text).to eq(text)
+  def assert_text(locator, text)
+    raise "Element text does not match expected text." unless expect(locator.text).to eq(text)
   end
 
   def get_screen_size

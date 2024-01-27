@@ -14,10 +14,10 @@ class DragAndDropScreen < SitePrism::Page
   end
 
   def select_drag
-    @el_dragme = Capybara.current_session.driver.appium_driver.find_element :accessibility_id, "dragMe"
-    @el_drop_here = Capybara.current_session.driver.appium_driver.find_element :xpath, "//android.widget.TextView[@text='Drop here.']"
+    el_dragme = $driver.find_element :accessibility_id, "dragMe"
+    el_drop_here = $driver.find_element :xpath, "//android.widget.TextView[@text='Drop here.']"
 
-    move_with_drag(@el_dragme, @el_drop_here)
+    move_with_drag(el_dragme, el_drop_here)
   end
 
   def verify_success_message(msg)

@@ -10,7 +10,7 @@ RSpec.describe "User Login", :regression, :login_regression do
 
   it "Happy path", :login do
     @login.go_app
-    @login.fill(@username, @password)
+    @login.fill(@username, @password+"as")
     @login.at_home
   end
 
