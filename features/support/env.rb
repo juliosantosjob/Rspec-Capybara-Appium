@@ -21,3 +21,9 @@ Capybara.configure do |config|
   config.default_driver = :appium
   include RSpec::Matchers
 end
+
+RSpec.configure do |config|
+  config.detail_color = :white
+  config.failure_color = :red
+  config.success_color = :blue
+end

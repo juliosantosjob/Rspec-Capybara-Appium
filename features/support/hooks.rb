@@ -9,22 +9,26 @@ RSpec.configure do |config|
     Capybara.current_session.driver.quit
   end
 
-  # embed("data:image/png;#{encoded_img}", "image/png")
+  config.before :each do |example|
+    puts "..."
+    puts "<< Running test: \"#{example.description}\" >>"
+  end
 
   config.after :each do |example|
     capy_driver = Capybara.current_session.driver
-    # status = example.metadata[:execution_result].status
-    name = example.metadata[:description]
+    puts example.exception.nil? ? "Test successful!" : "Test fail!"
+    puts ".."
 
     begin
-      puts " "
-      puts "<< Running scenario: #{name} >>"
-
       Dir.mkdir("logs") unless Dir.exist?("logs")
-      capy_driver.save_screenshot("logs/#{name.downcase}_" \
-      "#{example.metadata[:execution_result].status == "passed" ? "error" : "success"}.png")
+      capy_driver.save_screenshot("logs/#{example.description.gsub(" ", "_").downcase}_" \
+        "#{example.exception.nil? ? "passed" : "failed"}.png")
     rescue StandardError => e
       puts "Error: Unable to perform screenshot action! #{e.message}"
     end
+  end
+
+  config.after :all do |example|
+    puts "\nTotal examples: #{RSpec.world.example_count}"
   end
 end
