@@ -1,4 +1,4 @@
-require_relative "../support/env"
+require_relative "../support/configs_capy"
 require_relative "../utils/helpers"
 
 class NativeViewScreen < SitePrism::Page

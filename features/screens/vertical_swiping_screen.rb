@@ -1,4 +1,4 @@
-require_relative "../support/env"
+require_relative "../support/configs_capy"
 require_relative "../utils/helpers"
 
 data = YAML.load_file("constants/data.yml")["vertical_swipe_list"].values

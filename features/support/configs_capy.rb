@@ -1,6 +1,5 @@
 require "rspec"
 require "appium_capybara"
-require "appium_lib"
 require "site_prism"
 require "rubocop"
 require "yaml"

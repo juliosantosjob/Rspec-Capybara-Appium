@@ -1,4 +1,4 @@
-require_relative "env"
+require_relative "configs_capy"
 
 RSpec.configure do |config|
   config.before :each do
@@ -15,20 +15,20 @@ RSpec.configure do |config|
   end
 
   config.after :each do |example|
+    test_pass = example.exception.nil?
+
     capy_driver = Capybara.current_session.driver
-    puts example.exception.nil? ? "Test successful!" : "Test fail!"
-    puts ".."
+    puts test_pass ? "Test successful!" : "Test fail!"
+    puts "..."
 
     begin
       Dir.mkdir("logs") unless Dir.exist?("logs")
-      capy_driver.save_screenshot("logs/#{example.description.gsub(" ", "_").downcase}_" \
-        "#{example.exception.nil? ? "passed" : "failed"}.png")
+      shot_path = "logs/#{example.description.gsub(" ", "_").downcase}_" \
+      "#{test_pass ? "passed" : "failed"}.png"
+
+      capy_driver.save_screenshot(shot_path)
     rescue StandardError => e
       puts "Error: Unable to perform screenshot action! #{e.message}"
     end
-  end
-
-  config.after :all do |example|
-    puts "\nTotal examples: #{RSpec.world.example_count}"
   end
 end

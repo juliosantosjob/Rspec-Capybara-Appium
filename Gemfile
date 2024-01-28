@@ -1,11 +1,9 @@
 source "https://rubygems.org"
 
 gem "appium_capybara"
-gem "appium_lib"
 gem "httparty"
 gem "rake"
 gem "rspec"
-gem "rspec_tesults_formatter"
 gem "rubocop"
 gem "ruby-lsp"
 gem "site_prism"

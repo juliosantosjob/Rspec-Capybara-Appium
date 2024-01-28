@@ -28,17 +28,17 @@ task :build_app do
   end
 end
 
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.rspec_opts = "features/specs/*.rb --format html --out logs/rspec_results.html"
-end
+# RSpec::Core::RakeTask.new(:spec) do |t|
+#   t.rspec_opts = "features/specs/*.rb --format html --out logs/rspec_results.html"
+# end
 
-namespace :rspec_report do
-  desc "Run all specs and generate RSpec report in HTML"
-  task :html => :spec
+# namespace :rspec_report do
+#   desc "Run all specs and generate RSpec report in HTML"
+#   task :html => :spec
 
-  desc "Run all specs, generate RSpec report and open it in the browser"
-  task :browser do
-    Rake::Task[:spec].invoke
-    `open reports/rspec_results.html`
-  end
-end
+#   desc "Run all specs, generate RSpec report and open it in the browser"
+#   task :browser do
+#     Rake::Task[:spec].invoke
+#     `open reports/rspec_results.html`
+#   end
+# end
