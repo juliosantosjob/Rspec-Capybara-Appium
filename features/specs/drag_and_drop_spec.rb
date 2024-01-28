@@ -1,6 +1,6 @@
 require_relative "../screens/drag_and_drop_screen"
 
-RSpec.describe "Drag and drop", :regression, :regression_drag_and_drop do
+RSpec.describe "Drag and drop", :regression do
   before do
     @login.go_app
     @login.fill("admin", "admin")
