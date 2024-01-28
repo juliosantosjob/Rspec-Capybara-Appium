@@ -1,6 +1,6 @@
 require_relative "../screens/vertical_swiping_screen"
 
-RSpec.describe "Vertical swiping", :regression, :regression_vertical_swiping do
+RSpec.describe "Vertical swiping", :regression do
   before do
     @login.go_app
     @login.fill("admin", "admin")
