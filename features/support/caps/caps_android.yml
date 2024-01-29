@@ -1,6 +1,7 @@
 caps:
-  platformName: "Android"
+  platformName: "android"
   deviceName: "emulator"
+  appium:automationName': "uiautomator2"
   appium:app: "./app/VodQA.apk"
   appium:appActivity: "com.vodqareactnative.MainActivity"
 

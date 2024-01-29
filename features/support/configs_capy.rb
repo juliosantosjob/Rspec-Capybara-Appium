@@ -3,7 +3,8 @@ require "appium_capybara"
 require "site_prism"
 require "rubocop"
 require "yaml"
-require "ruby-lsp"
+require "allure-rspec"
+require "mini_magick"
 require_relative "hooks"
 require_relative "instances"
 
@@ -25,4 +26,11 @@ RSpec.configure do |config|
   config.detail_color = :white
   config.failure_color = :red
   config.success_color = :blue
+
+  config.formatter = AllureRspecFormatter
+end
+
+Allure.configure do |config|
+  config.results_directory = "allure-results"
+  config.clean_results_directory = true
 end

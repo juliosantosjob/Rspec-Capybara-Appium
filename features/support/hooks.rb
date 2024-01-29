@@ -16,19 +16,30 @@ RSpec.configure do |config|
 
   config.after :each do |example|
     test_pass = example.exception.nil?
-
     capy_driver = Capybara.current_session.driver
+    output_path = "allure-results"
+
     puts test_pass ? "Test successful!" : "Test fail!"
     puts "..."
 
     begin
-      Dir.mkdir("logs") unless Dir.exist?("logs")
-      shot_path = "logs/#{example.description.gsub(" ", "_").downcase}_" \
-      "#{test_pass ? "passed" : "failed"}.png"
+      Dir.mkdir(output_path) unless Dir.exist?(output_path)
+      shot_path = "#{output_path}/#{example.description.gsub(" ", "_").downcase}" \
+      "_#{test_pass ? "passed" : "failed"}.png"
 
       capy_driver.save_screenshot(shot_path)
+
+      # image = MiniMagick::Image.read(get_image)
+      # image.resize "50%"
+      # image.write("#{output_path}/imagem_redimensionada.png")
     rescue StandardError => e
       puts "Error: Unable to perform screenshot action! #{e.message}"
     end
+
+    Allure.add_attachment(
+      name: shot_path,
+      type: Allure::ContentType::PNG,
+      source: File.open(shot_path)
+    )
   end
 end

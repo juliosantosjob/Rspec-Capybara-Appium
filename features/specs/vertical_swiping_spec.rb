@@ -9,6 +9,6 @@ RSpec.describe "Vertical swiping", :regression do
 
   it "Checking first vertical swiping", :vertical_swiping do
     @vertical_swiping.access_vertical_swiping_screen
-    @vertical_swiping.vertical_swipe_success
+    @vertical_swiping.do_swipe_success
   end
 end

@@ -1,10 +1,11 @@
 source "https://rubygems.org"
 
+gem "allure-rspec"
 gem "appium_capybara"
 gem "httparty"
 gem "rake"
 gem "rspec"
 gem "rubocop"
-gem "ruby-lsp"
 gem "site_prism"
 gem "yaml"
+gem "mini_magick"

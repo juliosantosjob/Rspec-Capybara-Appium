@@ -16,7 +16,7 @@ class VerticalSwipingScreen < SitePrism::Page
     assert_visible(fld_title_vertical_swiping)
   end
 
-  def vertical_swipe_success
+  def do_swipe_success
     c_sharp_element = $driver.find_element :xpath, "//*[@text=' C#']"
 
     begin
