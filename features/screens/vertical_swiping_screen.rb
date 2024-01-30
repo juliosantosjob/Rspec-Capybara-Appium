@@ -17,7 +17,7 @@ class VerticalSwipingScreen < SitePrism::Page
   end
 
   def do_swipe_success
-    c_sharp_element = $driver.find_element(:xpath, "//*[@text=' C#']")
+    csharp_element = $driver.find_element(:xpath, "//*[@text=' C#']")
 
     begin
       condition_element = fld_framework.visible?
@@ -25,8 +25,7 @@ class VerticalSwipingScreen < SitePrism::Page
       puts "The element is not visible on the screen: #{e}"
     end
 
-    do_swipe(c_sharp_element, "screen_down") unless condition_element
-
+    do_swipe(csharp_element, "screen_down") unless condition_element
     assert_visible(fld_framework)
   end
 end
