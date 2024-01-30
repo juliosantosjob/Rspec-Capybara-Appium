@@ -17,7 +17,7 @@ class VerticalSwipingScreen < SitePrism::Page
   end
 
   def do_swipe_success
-    csharp_element = $driver.find_element(:xpath, "//*[@text=' C#']")
+    csharp_element = $driver.find_element :xpath, "//*[@text=' C#']"
 
     begin
       condition_element = fld_framework.visible?
