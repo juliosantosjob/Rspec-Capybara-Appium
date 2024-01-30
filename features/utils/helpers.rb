@@ -59,7 +59,8 @@ module Helper
   end
 
   def do_swipe(element_init, direction, timeout: 2500)
-    raise ArgumentError, "Enter a valid direction!" unless
+    begin
+      raise ArgumentError, "Enter a valid direction!" unless
       %w[
         screen_up
         screen_down
@@ -67,33 +68,36 @@ module Helper
         screen_right
       ].include?(direction)
 
-    init_position_x = element_init.location["x"] + element_init.size.width / 2
-    init_position_y = element_init.location["y"] + element_init.size.height / 2
+      init_position_x = element_init.location["x"] + element_init.size.width / 2
+      init_position_y = element_init.location["y"] + element_init.size.height / 2
 
-    case direction
-    when "screen_up"
-      x = element_init.location["x"] + element_init.size.width / 2
-      y = get_screen_size.height
+      case direction
+      when "screen_up"
+        x = element_init.location["x"] + element_init.size.width / 2
+        y = get_screen_size.height
 
-    when "screen_down"
-      x = element_init.location["x"] + element_init.size.width / 2
-      y = 0
+      when "screen_down"
+        x = element_init.location["x"] + element_init.size.width / 2
+        y = 0
 
-    when "screen_left"
-      x = 0
-      y = element_init.location["y"] + element_init.size.height / 2
+      when "screen_left"
+        x = 0
+        y = element_init.location["y"] + element_init.size.height / 2
 
-    when "screen_right"
-      x = get_screen_size.width
-      y = element_init.location["y"] + element_init.size.height / 2
+      when "screen_right"
+        x = get_screen_size.width
+        y = element_init.location["y"] + element_init.size.height / 2
+      end
+
+      Capybara.current_session.driver.swipe(
+        :start_x => init_position_x,
+        :start_y => init_position_y,
+        :end_x => x,
+        :end_y => y,
+        :duration => timeout
+      )
+    rescue => e
+      raise "Error: Unable to swipe the element: #{e.message}"
     end
-
-    Capybara.current_session.driver.swipe(
-      :start_x => init_position_x,
-      :start_y => init_position_y,
-      :end_x => x,
-      :end_y => y,
-      :duration => timeout
-    )
   end
 end

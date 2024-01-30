@@ -1,7 +1,7 @@
 require_relative "../support/configs_capy"
 require_relative "../utils/helpers"
 
-data = YAML.load_file("constants/data.yml")["vertical_swipe_list"].values
+data = YAML.load_file("features/constants/data.yml")["vertical_swipe_list"].values
 $random_framework = data[rand(data.length)]
 
 class VerticalSwipingScreen < SitePrism::Page
@@ -17,7 +17,7 @@ class VerticalSwipingScreen < SitePrism::Page
   end
 
   def do_swipe_success
-    c_sharp_element = $driver.find_element :xpath, "//*[@text=' C#']"
+    c_sharp_element = find(:xpath, "//*[@text=' C#']")
 
     begin
       condition_element = fld_framework.visible?

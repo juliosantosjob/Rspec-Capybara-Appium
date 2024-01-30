@@ -1,18 +1,17 @@
 require "rspec"
 require "appium_capybara"
 require "site_prism"
-require "rubocop"
 require "yaml"
 require "allure-rspec"
-require "mini_magick"
+require "capybara"
 require_relative "hooks"
 require_relative "instances"
 
-desired_caps = YAML.load_file("features/support/caps/caps_android.yml")
-caps = desired_caps["caps"]
-appium_lib = desired_caps["appium_lib"]
-
 Capybara.register_driver(:appium) do |app|
+  desired_caps = YAML.load_file(File.join(__dir__, "caps", "caps_android.yml"))
+  caps = desired_caps["caps"]
+  appium_lib = desired_caps["appium_lib"]
+
   Appium::Capybara::Driver.new app, caps: caps, appium_lib: appium_lib
 end
 
@@ -32,5 +31,5 @@ end
 
 Allure.configure do |config|
   config.results_directory = "allure-results"
-  config.clean_results_directory = true
+  config.clean_results_directory = false
 end

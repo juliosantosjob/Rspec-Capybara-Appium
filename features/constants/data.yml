@@ -1,0 +1,15 @@
+user:
+  username: "admin"
+  password: "admin"
+
+native_views:
+  view_one:  "Hello World, I'm View one"
+  view_two:  "Hello World, I'm View two"
+  view_three:  "Hello World, I'm View three"
+
+vertical_swipe_list:
+  one: ".net"
+  two: "MySql"
+  three: "Appium"
+  four: "Jest"
+  five: "Karma"

@@ -1,7 +1,7 @@
 require_relative "../screens/native_view_screen"
 
 RSpec.describe "Native view demo", :regression do
-  let(:text_views) { YAML.load_file("constants/data.yml")["native_views"].values }
+  let(:text_views) { YAML.load_file("features/constants/data.yml")["native_views"].values }
 
   before do
     @login.go_app
