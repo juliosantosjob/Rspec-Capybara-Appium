@@ -18,7 +18,7 @@ RSpec.configure do |config|
     test_pass = example.exception.nil?
     output_path = "allure-results"
 
-    puts test_pass ? "--> [ Test successful! ] <--" : "--> [ Test fail! ] <--"
+    puts "--{ #{test_pass ? "Test successful!" : "Test fail!" } }--"
     puts "..."
 
     begin
