@@ -58,7 +58,7 @@ module Helper
     end
   end
 
-  def do_swipe(element_init, direction, timeout: 2500)
+  def do_swipe(element_init, direction, timeout: 5000)
     begin
       raise ArgumentError, "Enter a valid direction!" unless
       %w[
@@ -89,7 +89,7 @@ module Helper
         y = element_init.location["y"] + element_init.size.height / 2
       end
 
-      Capybara.current_session.driver.swipe(
+      Appium::TouchAction.swipe(
         :start_x => init_position_x,
         :start_y => init_position_y,
         :end_x => x,

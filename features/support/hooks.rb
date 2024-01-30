@@ -11,7 +11,7 @@ RSpec.configure do |config|
 
   config.before :each do |example|
     puts "..."
-    puts "<< Running test: \"#{example.description}\" >>\n"
+    puts "<< Running test: \"#{example.description}\" >>"
   end
 
   config.after :each do |example|

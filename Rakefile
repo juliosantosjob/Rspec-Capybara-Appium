@@ -13,8 +13,8 @@ end
 
 task :allure_history do
   unless Dir.exist?("allure-results/allure-reports")
-    sh "allure generate --allure-results allure-results/allure-reports" \
-    " && (move allure-results/allure-reports/history allure-results/history)"
+    sh "allure generate" \
+    " && (move allure-report/history allure-results/history)"
   end
 end
 
