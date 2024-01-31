@@ -1,4 +1,4 @@
-require_relative "../support/configs_capy"
+require_relative "../support/capy"
 require_relative "../utils/helpers"
 
 class SliderScreen < SitePrism::Page

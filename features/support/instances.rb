@@ -1,4 +1,4 @@
-require_relative "configs_capy"
+require_relative "capy"
 
 RSpec.configure do |config|
   config.before(:each) do
@@ -7,6 +7,5 @@ RSpec.configure do |config|
     @slider = SliderScreen.new
     @vertical_swiping = VerticalSwipingScreen.new
     @drag_and_drop = DragAndDropScreen.new
-    @double_tap = DoubleTapScreen.new
   end
 end

@@ -1,4 +1,4 @@
-require_relative "../support/configs_capy"
+require_relative "../support/capy"
 require_relative "../utils/helpers"
 
 data = YAML.load_file("features/constants/data.yml")["technologies"].values

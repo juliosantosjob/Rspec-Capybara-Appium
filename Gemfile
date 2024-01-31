@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "allure-rspec"
+gem "allure-ruby-commons"
 gem "appium_capybara"
 gem "capybara"
 gem "httparty"

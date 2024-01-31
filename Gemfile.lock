@@ -97,6 +97,7 @@ PLATFORMS
 
 DEPENDENCIES
   allure-rspec
+  allure-ruby-commons
   appium_capybara
   capybara
   httparty
