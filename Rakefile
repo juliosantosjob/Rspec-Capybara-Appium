@@ -11,11 +11,9 @@ task :rubo do
   sh "rubocop --auto-correct"
 end
 
+desc "Add allure stories to the allure report"
 task :allure_history do
-  unless Dir.exist?("allure-results/allure-reports")
-    sh "allure generate" \
-    " && (move allure-report/history allure-results/history)"
-  end
+  sh "allure generate && (move allure-report/history allure-results/history)" unless Dir.exist?("allure-results")
 end
 
 desc "Donwload to app on project"

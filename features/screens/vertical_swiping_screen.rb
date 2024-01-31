@@ -1,7 +1,7 @@
 require_relative "../support/configs_capy"
 require_relative "../utils/helpers"
 
-data = YAML.load_file("features/constants/data.yml")["vertical_swipe_list"].values
+data = YAML.load_file("features/constants/data.yml")["technologies"].values
 $random_framework = data[rand(data.length)]
 
 class VerticalSwipingScreen < SitePrism::Page

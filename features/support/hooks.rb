@@ -15,16 +15,16 @@ RSpec.configure do |config|
   end
 
   config.after :each do |example|
-    test_pass = example.exception.nil?
-    output_path = "allure-results"
+    success = "\e[32m\u2713 Test successful!\e[0m"
+    error = "\e[31m\u2717 Test fail!\e[0m"
+    puts example.exception.nil? ? success : error
+  end
 
-    puts "--{ #{test_pass ? "Test successful!" : "Test fail!" } }--"
-    puts "..."
-
+  config.after :each do |example|
     begin
-      Dir.mkdir(output_path) unless Dir.exist?(output_path)
+      output_path = "allure-results"
       shot_path = "#{output_path}/#{example.description.gsub(" ", "_").downcase}" \
-        "_#{test_pass ? "passed" : "failed"}.png"
+        "_#{example.exception.nil? ? "passed" : "failed"}.png"
 
       Capybara.current_session.driver.save_screenshot(shot_path)
     rescue StandardError => e

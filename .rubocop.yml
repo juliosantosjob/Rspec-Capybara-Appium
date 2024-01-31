@@ -63,3 +63,9 @@ convention:Style/GuardClause:
 
 convention:Metrics/BlockLength:
   Enabled: false
+
+convention:Metrics/CyclomaticComplexity:
+  Enabled: false
+
+convention:Metrics/PerceivedComplexity:
+  Enabled: false

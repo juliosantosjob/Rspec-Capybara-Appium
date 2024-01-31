@@ -22,10 +22,6 @@ Capybara.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.detail_color = :white
-  config.failure_color = :red
-  config.success_color = :blue
-
   config.formatter = AllureRspecFormatter
 end
 

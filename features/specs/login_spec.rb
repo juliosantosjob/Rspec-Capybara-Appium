@@ -1,7 +1,7 @@
 require_relative "../screens/login_screen"
 
 RSpec.describe "User Login", :regression, :login_regression do
-  let(:user_data) { YAML.load_file("features/constants/data.yml")["user"] }
+  let(:user_data) { YAML.load_file("features/constants/data.yml")["user_credentials"] }
 
   before(:each) do
     @username = user_data["username"]

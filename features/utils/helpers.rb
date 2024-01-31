@@ -2,13 +2,13 @@ require_relative "../support/configs_capy"
 require_relative "../support/hooks"
 
 module Helper
-  def wait_for_element(locator, count = 10)
+  def wait_for_element(locator, timeout = 10)
     init = 0
-    until init == count
+    until init == timeout
       begin
         break if locator.visible? == true
       rescue
-        raise ArgumentError, "Unable to find the element #{elem} in #{count * 10} secs" if init == count - 1
+        raise ArgumentError, "Unable to find the element #{elem} in #{timeout * 10} secs" if init == count - 1
       end
       init += 1
     end
@@ -23,10 +23,10 @@ module Helper
     end
   end
 
-  def fill_value(locator, valor)
+  def fill_value(locator, text)
     begin
       wait_for_element(locator)
-      locator.set(valor)
+      locator.set(text)
     rescue => e
       puts "Error filling element. Original error: #{e.message}"
     end
@@ -44,13 +44,13 @@ module Helper
     Capybara.current_session.driver.appium_driver.window_size
   end
 
-  def move_with_drag(init_el, end_el, timeout: 2500)
+  def move_with_drag(locator_one, locator_two, timeout: 2500)
     mv = Appium::TouchAction.new
 
     begin
-      mv.long_press(element: init_el)
+      mv.long_press(element: locator_one)
         .wait(timeout)
-        .move_to(element: end_el)
+        .move_to(element: locator_two)
         .release
         .perform
     rescue => e
@@ -58,43 +58,49 @@ module Helper
     end
   end
 
-  def do_swipe(element_init, direction, timeout: 5000)
+  def do_swipe(locator_one, direction, locator_two = nil, timeout = 5000)
     begin
-      raise ArgumentError, "Enter a valid direction!" unless
-      %w[
+      args_direction = %w[
+        to
         screen_up
         screen_down
         screen_left
         screen_right
-      ].include?(direction)
+      ]
+      raise ArgumentError, "Enter a valid direction!" unless args_direction.include?(direction)
 
-      init_position_x = element_init.location["x"] + element_init.size.width / 2
-      init_position_y = element_init.location["y"] + element_init.size.height / 2
+      init_position_x = locator_one.location["x"] + locator_one.size.width / 2
+      init_position_y = locator_one.location["y"] + locator_one.size.height / 2
 
-      case direction
-      when "screen_up"
-        x = element_init.location["x"] + element_init.size.width / 2
-        y = get_screen_size.height
+      if !locator_two.nil? || direction == "to"
+        case direction
+        when "to"
+          x = locator_two.location["x"] + locator_two.size.width / 2
+          y = locator_two.location["y"] + locator_two.size.height / 2
+        end
+      else
+        case direction
+        when "screen_up"
+          x = locator_one.location["x"] + locator_one.size.width / 2
+          y = get_screen_size.height
 
-      when "screen_down"
-        x = element_init.location["x"] + element_init.size.width / 2
-        y = 0
+        when "screen_down"
+          x = locator_one.location["x"] + locator_one.size.width / 2
+          y = 0
 
-      when "screen_left"
-        x = 0
-        y = element_init.location["y"] + element_init.size.height / 2
+        when "screen_left"
+          x = 0
+          y = locator_one.location["y"] + locator_one.size.height / 2
 
-      when "screen_right"
-        x = get_screen_size.width
-        y = element_init.location["y"] + element_init.size.height / 2
+        when "screen_right"
+          x = get_screen_size.width
+          y = locator_one.location["y"] + locator_one.size.height / 2
+        end
       end
 
       Appium::TouchAction.swipe(
-        :start_x => init_position_x,
-        :start_y => init_position_y,
-        :end_x => x,
-        :end_y => y,
-        :duration => timeout
+        :start_x => init_position_x, :start_y => init_position_y,
+        :end_x => x, :end_y => y, :duration => timeout
       )
     rescue => e
       raise "Error: Unable to swipe the element: #{e.message}"
