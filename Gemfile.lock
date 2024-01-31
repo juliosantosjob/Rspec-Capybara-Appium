@@ -99,6 +99,7 @@ DEPENDENCIES
   allure-rspec
   allure-ruby-commons
   appium_capybara
+  appium_lib_core
   capybara
   httparty
   rake

@@ -8,8 +8,7 @@ views:
   third_view: "Hello World, I'm View three"
 
 technologies:
-  one: ".NET"
-  two: "MySQL"
-  three: "Appium"
-  four: "Jest"
-  five: "Karma"
+  one: "MySql"
+  two: "Appium"
+  three: "Jest"
+  four: "Karma"

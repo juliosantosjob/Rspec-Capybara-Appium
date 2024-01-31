@@ -25,4 +25,10 @@ RSpec.configure do |config|
       puts "\e[31m\nError: #{example.exception}\e[0m"
     end
   end
+
+  config.after(:suite) do |example|
+    puts "\nTotal examples: #{RSpec.world.example_count}"
+    erro_count = RSpec.world.filtered_examples.values.flatten.count(&:exception)
+    puts "Número de cenários com erro: #{erro_count}"
+  end
 end

@@ -3,7 +3,7 @@ require "httparty"
 
 desc "Exec project"
 task :run, [:tag] do |task, args|
-  sh "bundle exec rspec features/specs -t #{args.tag}"
+  sh "rspec features/specs -t #{args.tag}"
 end
 
 desc "Auto-correct code"
