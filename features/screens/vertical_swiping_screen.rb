@@ -21,8 +21,8 @@ class VerticalSwipingScreen < SitePrism::Page
 
     begin
       condition_element = fld_framework.visible?
-    rescue => e
-      puts "The element is not visible on the screen: #{e}"
+    rescue
+      condition_element = false
     end
 
     do_swipe(csharp_element, "screen_down") unless condition_element

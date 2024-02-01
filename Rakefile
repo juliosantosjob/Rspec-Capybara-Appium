@@ -3,6 +3,14 @@ require "httparty"
 
 desc "Exec project"
 task :run, [:tag] do |task, args|
+  caps = YAML.load_file("features/support/caps/caps_android.yml")
+
+  puts "..."
+  puts  "<< Platform: #{caps.dig("caps", "platformName")} >> \n" \
+        "<< DeviceName: #{caps.dig("caps", "deviceName")} >> \n" \
+        "<< Server: #{caps.dig("appium_lib", "server_url")} >> \n" \
+        "...\n\n"
+
   sh "rspec features/specs -t #{args.tag}"
 end
 
