@@ -1,14 +1,22 @@
 require "rake"
 require "httparty"
+require_relative "features/support/capy"
 
 desc "Exec project"
 task :run, [:tag] do |task, args|
-  caps = YAML.load_file("features/support/caps/caps_android.yml")
+  case ENV["PLATFORM"].downcase
+  when "android"
+    desired_caps = YAML.load_file("features/support/caps/caps_android.yml")
+  when "ios"
+    desired_caps = YAML.load_file("features/support/caps/caps_ios.yml")
+  else
+    raise "Error: The argument \"#{ENV["PLATFORM"]}\" is invalid!"
+  end
 
   puts "..."
-  puts  "<< Platform: #{caps.dig("caps", "platformName")} >> \n" \
-        "<< DeviceName: #{caps.dig("caps", "deviceName")} >> \n" \
-        "<< Server: #{caps.dig("appium_lib", "server_url")} >> \n" \
+  puts  "<< Platform: #{desired_caps.dig("caps", "platformName")} >> \n" \
+        "<< DeviceName: #{desired_caps.dig("caps", "deviceName")} >> \n" \
+        "<< Server: #{desired_caps.dig("appium_lib", "server_url")} >> \n" \
         "...\n\n"
 
   sh "rspec features/specs -t #{args.tag}"
@@ -20,8 +28,9 @@ task :rubo do
 end
 
 desc "Add allure stories to the allure report"
-task :allure_history do
+task :allure_open do
   sh "allure generate && (move allure-report/history allure-results/history)" unless Dir.exist?("allure-results")
+  sh "allure serve"
 end
 
 desc "Donwload to app on project"

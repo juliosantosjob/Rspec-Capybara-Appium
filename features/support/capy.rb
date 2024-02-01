@@ -9,12 +9,17 @@ require_relative "hooks"
 require_relative "instances"
 require_relative "reports"
 
-desired_caps = YAML.load_file(File.join(__dir__, "caps", "caps_android.yml"))
-
 Capybara.register_driver(:appium) do |app|
-  caps = desired_caps["caps"]
-  appium_lib = desired_caps["appium_lib"]
-  Appium::Capybara::Driver.new app, caps: caps, appium_lib: appium_lib
+  case ENV["PLATFORM"].downcase
+  when "android"
+    desired_caps = YAML.load_file(File.join(__dir__, "caps", "caps_android.yml"))
+  when "ios"
+    desired_caps = YAML.load_file(File.join(__dir__, "caps", "ios_android.yml"))
+  else
+    raise "The #{platform} argument is invalid!"
+  end
+
+  Appium::Capybara::Driver.new app, caps: desired_caps["caps"], appium_lib: desired_caps["appium_lib"]
 end
 
 Capybara.configure do |config|

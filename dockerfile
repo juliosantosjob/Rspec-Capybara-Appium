@@ -8,4 +8,10 @@ RUN bundle install
 
 COPY . .
 
-CMD ["rake", "run[regression]"]
+CMD ["rake", "run[login]"]
+
+# docker build -t ruby-automation .
+# docker run ruby-automation
+# docker rmi -f ruby-automation
+# docker images
+# EXPOSE 4723

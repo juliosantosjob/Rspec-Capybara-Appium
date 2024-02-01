@@ -3,6 +3,7 @@ require_relative "capy"
 RSpec.configure do |config|
   config.before(:each) { $driver = Capybara.current_session.driver.appium_driver }
   config.after(:each) { Capybara.current_session.driver.quit }
+  ENV["PLATFORM"] = "Android"
 
   config.after :each do |example|
     name_feature = example.example_group.description
