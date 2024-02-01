@@ -1,34 +1,18 @@
 require_relative "capy"
 
 RSpec.configure do |config|
-  config.before :each do
-    $driver = Capybara.current_session.driver.appium_driver
-  end
-
-  config.after :each do
-    Capybara.current_session.driver.quit
-  end
-
-  config.before :each do |example|
-    puts "..."
-    puts "<< Running test: \"#{example.description}\" >>"
-  end
+  config.before(:each) { $driver = Capybara.current_session.driver.appium_driver }
+  config.after(:each) { Capybara.current_session.driver.quit }
 
   config.after :each do |example|
-    success = "\e[32m\u2713 Test successful!\e[0m"
-    error = "\e[31m\u2717 Test fail!\e[0m"
-
-    if example.exception.nil?
-      puts success
-    else
-      puts error
-      puts "\e[31m\nError: #{example.exception}\e[0m"
-    end
+    status = example.exception.nil? ? "\e[32m\u2713\e[0m" : "\e[31m\u2717\e[0m"
+    puts "<< Test: \"#{example.description}\" ( #{status} ) >>"
   end
 
-  config.after(:suite) do |example|
-    puts "\nTotal examples: #{RSpec.world.example_count}"
+  config.after :suite do |example|
+    all_count = RSpec.world.example_count
     erro_count = RSpec.world.filtered_examples.values.flatten.count(&:exception)
-    puts "Número de cenários com erro: #{erro_count}"
+    success_count = RSpec.world.filtered_examples.values.flatten.reject(&:exception).count
+    puts "\n(total #{all_count}, passed #{success_count}, failed #{erro_count})"
   end
 end
