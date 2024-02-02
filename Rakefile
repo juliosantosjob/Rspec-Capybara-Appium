@@ -4,20 +4,22 @@ require_relative "features/support/capy"
 
 desc "Exec project"
 task :run, [:tag] do |task, args|
-  case ENV["PLATFORM"].downcase
-  when "android"
-    desired_caps = YAML.load_file("features/support/caps/caps_android.yml")
-  when "ios"
-    desired_caps = YAML.load_file("features/support/caps/caps_ios.yml")
+  platform = ENV["PLATFORM"].downcase
+  if platform == "android"
+    caps_file = "caps_android.yml"
+  elsif platform == "ios"
+    caps_file = "caps_ios.yml"
   else
-    raise "Error: The argument \"#{ENV["PLATFORM"]}\" is invalid!"
+    raise "Error: The argument \"#{platform}\" is invalid!"
   end
 
-  puts "..."
-  puts  "<< Platform: #{desired_caps.dig("caps", "platformName")} >> \n" \
-        "<< DeviceName: #{desired_caps.dig("caps", "deviceName")} >> \n" \
-        "<< Server: #{desired_caps.dig("appium_lib", "server_url")} >> \n" \
-        "...\n\n"
+  desired_caps = YAML.load_file("features/support/caps/#{caps_file}")
+
+  puts "══════════════════════════════════════"
+  puts  "| Platform: #{desired_caps.dig("caps", "platformName")} \n" \
+        "| Device: #{desired_caps.dig("caps", "deviceName")} \n" \
+        "| Server: #{desired_caps.dig("appium_lib", "server_url")} \n" \
+        "══════════════════════════════════════\n\n"
 
   sh "rspec features/specs -t #{args.tag}"
 end
