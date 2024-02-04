@@ -9,7 +9,7 @@ require_relative "hooks"
 require_relative "instances"
 require_relative "reports"
 
-platform = ENV["PLATFORM"].downcase
+platform = ENV["PLATFORM"].upercase
 if platform == "android"
   caps_file = "caps_android.yml"
 elsif platform == "ios"
