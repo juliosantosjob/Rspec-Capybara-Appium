@@ -4,7 +4,7 @@ require_relative "features/support/capy"
 
 desc "Exec project"
 task :run, [:platform], [:tag] do |task, args|
-  ENV["PLATFORM"] = args.platform.upercase
+  ENV["PLATFORM"] = args.platform.upcase
   if ENV["PLATFORM"] == "ANDROID"
     caps_file = "caps_android.yml"
   elsif ENV["PLATFORM"] == "IOS"
