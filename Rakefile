@@ -15,11 +15,11 @@ task :run, [:tag] do |task, args|
 
   desired_caps = YAML.load_file("features/support/caps/#{caps_file}")
 
-  puts "══════════════════════════════════════"
+  puts "____________________________________________"
   puts  "| Platform: #{desired_caps.dig("caps", "platformName")} \n" \
         "| Device: #{desired_caps.dig("caps", "deviceName")} \n" \
         "| Server: #{desired_caps.dig("appium_lib", "server_url")} \n" \
-        "══════════════════════════════════════\n\n"
+        "-------------------------------------------\n\n"
 
   sh "rspec features/specs -t #{args.tag}"
 end
@@ -36,7 +36,7 @@ task :allure_open do
 end
 
 desc "Donwload to app on project"
-task :build_app do
+task :build_android do
   @url_apk = "https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk"
 
   unless Dir.exist?("app")
@@ -44,6 +44,21 @@ task :build_app do
 
     response = HTTParty.get(@url_apk)
     file_path = File.join(__dir__, "app", "VodQA.apk")
+
+    File.open(file_path, "wb") do |file|
+      file.write(response.body)
+    end
+  end
+end
+
+task :build_ios do
+  @url_ipa = "" # <-- url download of ipa project
+
+  unless Dir.exist?("app")
+    Dir.mkdir("app")
+
+    response = HTTParty.get(@url_ipa)
+    file_path = File.join(__dir__, "app", "VodQA.ipa")
 
     File.open(file_path, "wb") do |file|
       file.write(response.body)
