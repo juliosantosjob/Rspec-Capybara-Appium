@@ -9,10 +9,10 @@ require_relative "hooks"
 require_relative "instances"
 require_relative "reports"
 
-platform = ENV["PLATFORM"].upercase
-if platform == "android"
+platform = ENV["PLATFORM"].upcase
+if platform == "ANDROID"
   caps_file = "caps_android.yml"
-elsif platform == "ios"
+elsif platform == "IOS"
   caps_file = "caps_ios.yml"
 else
   raise "Error: The argument \"#{platform}\" is invalid!"
