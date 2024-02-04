@@ -9,13 +9,16 @@ require_relative "hooks"
 require_relative "instances"
 require_relative "reports"
 
-platform = ENV["PLATFORM"].upcase
-if platform == "ANDROID"
+platform = ENV["PLATFORM"]
+platform ||= "ANDROID"
+
+case platform.upcase
+when "ANDROID"
   caps_file = "caps_android.yml"
-elsif platform == "IOS"
+when "IOS"
   caps_file = "caps_ios.yml"
 else
-  raise "Error: The argument \"#{platform}\" is invalid!"
+  raise "Error: The platform '#{platform}' is invalid!"
 end
 
 desired_caps = YAML.load_file(File.join(__dir__, "caps", caps_file))
@@ -36,5 +39,4 @@ end
 Allure.configure do |config|
   config.results_directory = "allure-results"
   config.clean_results_directory = true
-  config.logging_level = Logger::INFO
 end

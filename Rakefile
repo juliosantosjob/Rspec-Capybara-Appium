@@ -3,26 +3,30 @@ require "httparty"
 require_relative "features/support/capy"
 
 desc "Exec project"
-task :run, [:platform], [:tag] do |task, args|
+task :run, [:platform, :tag] do |task, args|
+  args.platform ||= "ANDROID"
+
   ENV["PLATFORM"] = args.platform.upcase
+
   if ENV["PLATFORM"] == "ANDROID"
     caps_file = "caps_android.yml"
   elsif ENV["PLATFORM"] == "IOS"
     caps_file = "caps_ios.yml"
   else
-    raise "Error: The argument \"#{platform}\" is invalid!"
+    raise "Error: The argument \"#{ENV["PLATFORM"]}\" is invalid!"
   end
 
   desired_caps = YAML.load_file("features/support/caps/#{caps_file}")
 
-  puts "____________________________________________"
+  puts "----------------------------------------------"
   puts  "| Platform: #{desired_caps.dig("caps", "platformName")} \n" \
         "| Device: #{desired_caps.dig("caps", "deviceName")} \n" \
         "| Server: #{desired_caps.dig("appium_lib", "server_url")} \n" \
-        "-------------------------------------------\n\n"
-
-  args.tag ||= :regression
+        "---------------------------------------------\n\n"
   sh "rspec features/specs -t #{args.tag}"
+
+  ## WARNING: To run the project you need to pass the platform and
+  ## the name of the feature example: "rake run[android,login]"
 end
 
 desc "Auto-correct code"
@@ -38,10 +42,14 @@ end
 
 def download_app(url, filename)
   unless Dir.exist?("app")
-    FileUtils.mkdir_p("app")
-    
+    Dir.mkdir("app")
+
     response = HTTParty.get(url)
-    File.write(File.join(__dir__, "app", filename), response.body)
+    file_path = File.join(__dir__, "app", filename)
+
+    File.open(file_path, "wb") do |file|
+      file.write(response.body)
+    end
   end
 end
 
@@ -52,5 +60,5 @@ end
 
 desc "Download the app for iOS project"
 task :build_ios do
-  download_app("https://example.com/path/to/your.ipa", "VodQA.ipa") # url download of project IPA
+  download_app("https://example.com/path/to/app.ipa", "VodQA.ipa") # url download of project IPA
 end
