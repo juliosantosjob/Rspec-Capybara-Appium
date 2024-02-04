@@ -1,9 +1,6 @@
 require_relative "capy"
 
 RSpec.configure do |config|
-  # Environments
-  ENV["PLATFORM"] = "Android"
-
   config.before(:each) do
     @login ||= LoginScreen.new
     @native_view ||= NativeViewScreen.new
