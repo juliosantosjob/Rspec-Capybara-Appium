@@ -35,33 +35,21 @@ task :allure_open do
   sh "allure serve"
 end
 
-desc "Donwload to app on project"
-task :build_android do
-  @url_apk = "https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk"
-
+def download_app(url, filename)
   unless Dir.exist?("app")
-    Dir.mkdir("app")
-
-    response = HTTParty.get(@url_apk)
-    file_path = File.join(__dir__, "app", "VodQA.apk")
-
-    File.open(file_path, "wb") do |file|
-      file.write(response.body)
-    end
+    FileUtils.mkdir_p("app")
+    
+    response = HTTParty.get(url)
+    File.write(File.join(__dir__, "app", filename), response.body)
   end
 end
 
+desc "Download the app for Android project"
+task :build_android do
+  download_app("https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk", "VodQA.apk")
+end
+
+desc "Download the app for iOS project"
 task :build_ios do
-  @url_ipa = "" # <-- url download of ipa project
-
-  unless Dir.exist?("app")
-    Dir.mkdir("app")
-
-    response = HTTParty.get(@url_ipa)
-    file_path = File.join(__dir__, "app", "VodQA.ipa")
-
-    File.open(file_path, "wb") do |file|
-      file.write(response.body)
-    end
-  end
+  download_app("https://example.com/path/to/your.ipa", "VodQA.ipa") # Substitua pelo URL real do projeto IPA
 end
