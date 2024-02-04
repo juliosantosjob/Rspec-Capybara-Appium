@@ -51,5 +51,5 @@ end
 
 desc "Download the app for iOS project"
 task :build_ios do
-  download_app("https://example.com/path/to/your.ipa", "VodQA.ipa") # Substitua pelo URL real do projeto IPA
+  download_app("https://example.com/path/to/your.ipa", "VodQA.ipa") # url download of project IPA
 end
