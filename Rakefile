@@ -21,6 +21,7 @@ task :run, [:platform], [:tag] do |task, args|
         "| Server: #{desired_caps.dig("appium_lib", "server_url")} \n" \
         "-------------------------------------------\n\n"
 
+  args.tag ||= :regression
   sh "rspec features/specs -t #{args.tag}"
 end
 
