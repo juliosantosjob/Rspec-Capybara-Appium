@@ -3,11 +3,11 @@ require "httparty"
 require_relative "features/support/capy"
 
 desc "Exec project"
-task :run, [:tag] do |task, args|
-  platform = ENV["PLATFORM"].downcase
-  if platform == "android"
+task :run, [:platform], [:tag] do |task, args|
+  ENV["PLATFORM"] = args.platform.upercase
+  if ENV["PLATFORM"] == "ANDROID"
     caps_file = "caps_android.yml"
-  elsif platform == "ios"
+  elsif ENV["PLATFORM"] == "IOS"
     caps_file = "caps_ios.yml"
   else
     raise "Error: The argument \"#{platform}\" is invalid!"
