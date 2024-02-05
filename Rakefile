@@ -5,6 +5,7 @@ require_relative "features/support/capy"
 desc "Exec project"
 task :run, [:platform, :tag] do |task, args|
   args.platform ||= "ANDROID"
+  args.tag ||= "regression"
 
   ENV["PLATFORM"] = args.platform.upcase
 
@@ -18,12 +19,12 @@ task :run, [:platform, :tag] do |task, args|
 
   desired_caps = YAML.load_file("features/support/caps/#{caps_file}")
 
-  puts "----------------------------------------------"
+  puts "────────────────────────────────────────────────"
   puts  "| Platform: #{desired_caps.dig("caps", "platformName")} \n" \
         "| Device: #{desired_caps.dig("caps", "deviceName")} \n" \
         "| Server: #{desired_caps.dig("appium_lib", "server_url")} \n" \
-        "---------------------------------------------\n\n"
-  sh "rspec features/specs -t #{args.tag}"
+        "────────────────────────────────────────────────\n"
+  sh "rspec features/specs #{args.tag.nil? ? "" : "-t #{args.tag}"}"
 
   ## WARNING: To run the project you need to pass the platform and
   ## the name of the feature example: "rake run[android,login]"
@@ -36,7 +37,8 @@ end
 
 desc "Add allure stories to the allure report"
 task :allure_open do
-  sh "allure generate && (move allure-report/history allure-results/history)" unless Dir.exist?("allure-results")
+  sh "allure generate --clean"
+  sh "move allure-report/history allure-results/history"
   sh "allure serve"
 end
 
@@ -60,5 +62,5 @@ end
 
 desc "Download the app for iOS project"
 task :build_ios do
-  download_app("https://example.com/path/to/app.ipa", "VodQA.ipa") # url download of project IPA
+  download_app("https://example.com/path/to/app.ipa", "VodQA.ipa") #--> url download of project IPA
 end

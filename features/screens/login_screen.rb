@@ -1,14 +1,17 @@
 require_relative "../support/capy"
+require_relative "../support/base_page"
 require_relative "../utils/helpers"
 
-class LoginScreen < SitePrism::Page
+class LoginScreen < BasePage
   include Helper
 
-  element :btn_login, :accessibility_id, "login"
-  element :fld_username, :accessibility_id, "username"
-  element :fld_password, :accessibility_id, "password"
-  element :fld_samples_list, :xpath, "//*[contains(@text,'Samples List')]"
-  element :msg_error, :id, "android:id/message"
+  #--> If it passes, inform iOS when executing the project, it will take the second argument.
+
+  element :btn_login, "accessibility_id:login", "locator:ios"
+  element :fld_username, "accessibility_id:username", "locator:ios"
+  element :fld_password, "accessibility_id:password", "locator:ios"
+  element :fld_samples_list, "xpath://*[contains(@text,'Samples List')]", "locator:ios"
+  element :msg_error, "xpath:(//android.widget.TextView)[2]", "locator:ios"
 
   def go_app
     assert_visible(btn_login)

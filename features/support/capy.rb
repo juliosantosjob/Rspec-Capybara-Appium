@@ -9,16 +9,15 @@ require_relative "hooks"
 require_relative "instances"
 require_relative "reports"
 
-platform = ENV["PLATFORM"]
-platform ||= "ANDROID"
+ENV["PLATFORM"] ||= "ANDROID"
 
-case platform.upcase
+case ENV["PLATFORM"].upcase
 when "ANDROID"
   caps_file = "caps_android.yml"
 when "IOS"
   caps_file = "caps_ios.yml"
 else
-  raise "Error: The platform '#{platform}' is invalid!"
+  raise "Error: The platform '#{ENV["PLATFORM"]}' is invalid!"
 end
 
 desired_caps = YAML.load_file(File.join(__dir__, "caps", caps_file))

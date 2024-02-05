@@ -58,6 +58,17 @@ module Helper
     end
   end
 
+  def find_element_by_platform(**args)
+    platform = ENV["PLATFORM"].downcase
+    if platform == "android"
+      return $driver.find_element(*args.values_at(:type_and, :locator_and))
+    elsif platform == "ios"
+      return $driver.find_element(*args.values_at(:type_ios, :locator_ios))
+    else
+      raise "Platform not supported: #{platform}"
+    end
+  end
+
   def do_swipe(locator_one, direction, locator_two = nil, timeout = 5000)
     begin
       args_direction = %w[

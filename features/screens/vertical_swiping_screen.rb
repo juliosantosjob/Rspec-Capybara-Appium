@@ -4,12 +4,12 @@ require_relative "../utils/helpers"
 data = YAML.load_file("features/constants/data.yml")["technologies"].values
 $random_framework = data[rand(data.length)]
 
-class VerticalSwipingScreen < SitePrism::Page
+class VerticalSwipingScreen < BasePage
   include Helper
 
-  element :btn_vertical_swiping, :xpath, "//android.widget.TextView[@content-desc='verticalSwipe']"
-  element :fld_title_vertical_swiping, :xpath, "//*[contains(@text,'Vertical swiping')]"
-  element :fld_framework, :xpath, "//android.widget.TextView[@text=' #{$random_framework}']"
+  element :btn_vertical_swiping, "xpath://android.widget.TextView[@content-desc='verticalSwipe']", "locator:ios"
+  element :fld_title_vertical_swiping, "xpath://*[contains(@text,'Vertical swiping')]", "locator:ios"
+  element :fld_framework, "xpath://android.widget.TextView[@text=' #{$random_framework}']", "locator:ios"
 
   def access_vertical_swiping_screen
     wait_and_tap(btn_vertical_swiping, 5)
@@ -17,7 +17,10 @@ class VerticalSwipingScreen < SitePrism::Page
   end
 
   def do_swipe_success
-    csharp_element = $driver.find_element :xpath, "//*[@text=' C#']"
+    csharp_element = find_element_by_platform(
+      type_and: :xpath, locator_and: "//*[@text=' C#']",
+      type_ios: :id, locator_ios: "slider_ios"
+    )
 
     begin
       condition_element = fld_framework.visible?
