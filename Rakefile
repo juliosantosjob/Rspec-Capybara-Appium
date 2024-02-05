@@ -5,8 +5,6 @@ require_relative "features/support/capy"
 desc "Exec project"
 task :run, [:platform, :tag] do |task, args|
   args.platform ||= "ANDROID"
-  args.tag ||= "regression"
-
   ENV["PLATFORM"] = args.platform.upcase
 
   if ENV["PLATFORM"] == "ANDROID"
