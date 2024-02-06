@@ -5,8 +5,8 @@ require_relative "features/support/capy"
 desc "Exec project"
 task :run, [:platform, :tag] do |task, args|
   args.platform ||= "ANDROID"
-  ENV["PLATFORM"] = args.platform.upcase
 
+  ENV["PLATFORM"] = args.platform.upcase
   if ENV["PLATFORM"] == "ANDROID"
     caps_file = "caps_android.yml"
   elsif ENV["PLATFORM"] == "IOS"
@@ -23,9 +23,6 @@ task :run, [:platform, :tag] do |task, args|
         "| Server: #{desired_caps.dig("appium_lib", "server_url")} \n" \
         "────────────────────────────────────────────────\n"
   sh "rspec features/specs #{args.tag.nil? ? "" : "-t #{args.tag}"}"
-
-  ## WARNING: To run the project you need to pass the platform and
-  ## the name of the feature example: "rake run[android,login]"
 end
 
 desc "Auto-correct code"
