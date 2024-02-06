@@ -23,7 +23,10 @@ class SliderScreen < BasePage
   end
 
   def swipe_two
-    slider_two = $driver.find_element :accessibility_id, "slider1"
+    slider_two = find_element_by_platform(
+      type_and: :accessibility_id, locator_and: "slider1",
+      type_ios: :id, locator_ios: "slider_ios"
+    )
     do_swipe(slider_two, "screen_right")
   end
 
