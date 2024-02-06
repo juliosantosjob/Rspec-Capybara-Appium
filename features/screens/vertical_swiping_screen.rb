@@ -23,7 +23,7 @@ class VerticalSwipingScreen < BasePage
     )
 
     begin
-      condition_element = fld_framework.visible?
+      condition_element = assert_visible(fld_framework)
     rescue
       condition_element = false
     end
