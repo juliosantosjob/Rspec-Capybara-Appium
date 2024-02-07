@@ -5,8 +5,6 @@ require_relative "../utils/helpers"
 class LoginScreen < BasePage
   include Helper
 
-  #--> If it passes, inform iOS when executing the project, it will take the second argument.
-
   element :btn_login, "accessibility_id:login", "locator:ios"
   element :fld_username, "accessibility_id:username", "locator:ios"
   element :fld_password, "accessibility_id:password", "locator:ios"
