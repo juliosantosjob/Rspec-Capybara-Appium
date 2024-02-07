@@ -27,7 +27,7 @@ or
 rake run[ios]
 ```
 
-"To run a scenario using the tag, simply insert a comma and pass the name of the tag. For example:"
+To run a scenario using the tag, simply insert a comma and pass the name of the tag. For example:
 
 ```
 rake run[android,login]
