@@ -106,8 +106,11 @@ module Helper
         end
 
       Appium::TouchAction.swipe(
-        :start_x => init_position_x, :start_y => init_position_y,
-        :end_x => x, :end_y => y, :duration => timeout
+        :start_x => init_position_x, 
+        :start_y => init_position_y,
+        :end_x => x, 
+        :end_y => y, 
+        :duration => timeout
       )
     rescue => e
       raise "Error: Unable to swipe the element: #{e.message}"
