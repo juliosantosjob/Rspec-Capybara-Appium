@@ -83,14 +83,11 @@ module Helper
       init_position_x = locator_one.location["x"] + locator_one.size.width / 2
       init_position_y = locator_one.location["y"] + locator_one.size.height / 2
 
-      if !locator_two.nil? || direction == "to"
         case direction
         when "to"
           x = locator_two.location["x"] + locator_two.size.width / 2
           y = locator_two.location["y"] + locator_two.size.height / 2
-        end
-      else
-        case direction
+
         when "screen_up"
           x = locator_one.location["x"] + locator_one.size.width / 2
           y = get_screen_size.height
@@ -107,7 +104,6 @@ module Helper
           x = get_screen_size.width
           y = locator_one.location["y"] + locator_one.size.height / 2
         end
-      end
 
       Appium::TouchAction.swipe(
         :start_x => init_position_x, :start_y => init_position_y,
