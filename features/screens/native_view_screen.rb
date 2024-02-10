@@ -17,12 +17,12 @@ class NativeViewScreen < BasePage
   end
 
   def see_text_view(txt)
-    all_elements = [
+    all_text_views = [
       fld_first_text_view,
       fld_second_text_view,
       fld_third_text_view
     ]
-    text_view = all_elements.find { |element| element.text.include?(txt) }
-    assert_visible(text_view)
+    current_text_view = all_text_views.find { |element| element.text.include?(txt) }
+    assert_visible(current_text_view)
   end
 end
