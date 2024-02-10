@@ -69,3 +69,6 @@ convention:Metrics/CyclomaticComplexity:
 
 convention:Metrics/PerceivedComplexity:
   Enabled: false
+
+convention:Metrics/ModuleLength:
+  Enabled: false

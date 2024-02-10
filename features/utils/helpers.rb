@@ -69,6 +69,16 @@ module Helper
     end
   end
 
+  def double_tap(locator)
+    dbl = Appium::TouchAction.new
+
+    begin
+      dbl.tap(element: locator, count: 2).perform
+    rescue => e
+      raise ArgumentError, "An error occurred while performing the double tap: #{e.message}"
+    end
+  end
+
   def do_swipe(locator_one, direction, locator_two = nil, timeout = 5000)
     begin
       args_direction = %w[
