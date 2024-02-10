@@ -83,33 +83,33 @@ module Helper
       init_position_x = locator_one.location["x"] + locator_one.size.width / 2
       init_position_y = locator_one.location["y"] + locator_one.size.height / 2
 
-        case direction
-        when "to"
-          x = locator_two.location["x"] + locator_two.size.width / 2
-          y = locator_two.location["y"] + locator_two.size.height / 2
+      case direction
+      when "to"
+        x = locator_two.location["x"] + locator_two.size.width / 2
+        y = locator_two.location["y"] + locator_two.size.height / 2
 
-        when "screen_up"
-          x = locator_one.location["x"] + locator_one.size.width / 2
-          y = get_screen_size.height
+      when "screen_up"
+        x = locator_one.location["x"] + locator_one.size.width / 2
+        y = get_screen_size.height
 
-        when "screen_down"
-          x = locator_one.location["x"] + locator_one.size.width / 2
-          y = 0
+      when "screen_down"
+        x = locator_one.location["x"] + locator_one.size.width / 2
+        y = 0
 
-        when "screen_left"
-          x = 0
-          y = locator_one.location["y"] + locator_one.size.height / 2
+      when "screen_left"
+        x = 0
+        y = locator_one.location["y"] + locator_one.size.height / 2
 
-        when "screen_right"
-          x = get_screen_size.width
-          y = locator_one.location["y"] + locator_one.size.height / 2
-        end
+      when "screen_right"
+        x = get_screen_size.width
+        y = locator_one.location["y"] + locator_one.size.height / 2
+      end
 
       Appium::TouchAction.swipe(
-        :start_x => init_position_x, 
+        :start_x => init_position_x,
         :start_y => init_position_y,
-        :end_x => x, 
-        :end_y => y, 
+        :end_x => x,
+        :end_y => y,
         :duration => timeout
       )
     rescue => e
