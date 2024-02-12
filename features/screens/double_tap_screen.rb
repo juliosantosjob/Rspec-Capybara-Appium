@@ -1,8 +1,8 @@
 require_relative "../support/capy"
-require_relative "../support/base_page"
+require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class DoubleTapScreen < BasePage
+class DoubleTapScreen < BaseScreen
   include Helper
 
   element :btn_drag_and_drop, "xpath://android.widget.TextView[@content-desc='doubleTap']", "locator:ios"
