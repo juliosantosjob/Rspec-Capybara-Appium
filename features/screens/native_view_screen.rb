@@ -1,5 +1,5 @@
 require_relative "../support/capy"
-require_relative "../support/base_page"
+require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
 class NativeViewScreen < BasePage
