@@ -46,11 +46,8 @@ module Helper
 
   def move_with_drag(locator_one, locator_two, timeout: 2500)
     begin
-      Appium::TouchAction.new.long_press(element: locator_one)
-        .wait(timeout)
-        .move_to(element: locator_two)
-        .release
-        .perform
+      Appium::TouchAction
+        .new.long_press(element: locator_one).wait(timeout).move_to(element: locator_two).release.perform
     rescue => e
       raise "Unable to move the element: #{e.message}"
     end

@@ -9,5 +9,6 @@ RSpec.configure do |config|
     @drag_and_drop ||= DragAndDropScreen.new
     @double_tap ||= DoubleTapScreen.new
     @long_press ||= LongPressScreen.new
+    @photo_view ||= PhotoViewScreen.new
   end
 end
