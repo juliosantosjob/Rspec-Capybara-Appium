@@ -8,7 +8,7 @@ module Helper
       begin
         break if locator.visible? == true
       rescue
-        raise ArgumentError, "Unable to find the element #{elem} in #{timeout * 10} secs" if init == count - 1
+        raise ArgumentError, "Unable to find the element #{elem} in #{timeout * 10} secs" if init == timeout - 1
       end
       init += 1
     end
