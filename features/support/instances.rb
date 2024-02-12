@@ -8,5 +8,6 @@ RSpec.configure do |config|
     @vertical_swiping ||= VerticalSwipingScreen.new
     @drag_and_drop ||= DragAndDropScreen.new
     @double_tap ||= DoubleTapScreen.new
+    @long_press ||= LongPressScreen.new
   end
 end
