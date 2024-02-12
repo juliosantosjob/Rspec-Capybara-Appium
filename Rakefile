@@ -40,21 +40,20 @@ end
 def download_app(url, filename)
   Dir.mkdir("app") unless Dir.exist?("app")
 
-    response = HTTParty.get(url)
-    file_path = File.join(__dir__, "app", filename)
+  response = HTTParty.get(url)
+  file_path = File.join(__dir__, "app", filename)
 
-    File.open(file_path, "wb") do |file|
-      file.write(response.body)
-    end
+  File.open(file_path, "wb") do |file|
+    file.write(response.body)
   end
 end
 
 desc "Download the app for Android project"
-task :build_android do
+task :android_build do
   download_app("https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk", "VodQA.apk")
 end
 
 desc "Download the app for iOS project"
-task :build_ios do
+task :ios_build do
   download_app("https://example.com/path/to/app.ipa", "VodQA.ipa") #--> url download of project IPA
 end

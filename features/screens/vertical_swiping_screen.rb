@@ -4,7 +4,7 @@ require_relative "../utils/helpers"
 data = YAML.load_file("features/constants/data.yml")["technologies"].values
 $random_framework = data[rand(data.length)]
 
-class VerticalSwipingScreen < BasePage
+class VerticalSwipingScreen < BaseScreen
   include Helper
 
   element :btn_vertical_swiping, "xpath://android.widget.TextView[@content-desc='verticalSwipe']", "locator:ios"
@@ -16,7 +16,7 @@ class VerticalSwipingScreen < BasePage
     assert_visible(fld_title_vertical_swiping)
   end
 
-  def do_swipe_success
+  def do_a_swipe_success
     csharp_element = find_element_by_platform(
       type_and: :xpath, locator_and: "//*[@text=' C#']",
       type_ios: :id, locator_ios: "slider_ios"
@@ -28,7 +28,7 @@ class VerticalSwipingScreen < BasePage
       condition_element = false
     end
 
-    do_swipe(csharp_element, "screen_down") unless condition_element
+    do_a_swipe(csharp_element, "screen_down") unless condition_element
     assert_visible(fld_framework)
   end
 end

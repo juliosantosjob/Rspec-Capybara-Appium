@@ -2,7 +2,7 @@ require_relative "../support/capy"
 require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class SliderScreen < BasePage
+class SliderScreen < BaseScreen
   include Helper
 
   element :btn_slider, "xpath://android.widget.TextView[@content-desc='slider1']", "locator:ios"
@@ -19,7 +19,8 @@ class SliderScreen < BasePage
       type_and: :accessibility_id, locator_and: "slider",
       type_ios: :id, locator_ios: "slider_ios"
     )
-    do_swipe(slider_one, "screen_right")
+
+    do_a_swipe(slider_one, "screen_right")
   end
 
   def swipe_two
@@ -27,7 +28,8 @@ class SliderScreen < BasePage
       type_and: :accessibility_id, locator_and: "slider1",
       type_ios: :id, locator_ios: "slider_ios"
     )
-    do_swipe(slider_two, "screen_right")
+
+    do_a_swipe(slider_two, "screen_right")
   end
 
   def end_of_slide

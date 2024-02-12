@@ -2,7 +2,7 @@ require_relative "../support/capy"
 require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class DragAndDropScreen < BasePage
+class DragAndDropScreen < BaseScreen
   include Helper
 
   element :btn_drag_and_drop, "xpath://android.widget.TextView[@content-desc='dragAndDrop']"

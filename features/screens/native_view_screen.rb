@@ -2,7 +2,7 @@ require_relative "../support/capy"
 require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class NativeViewScreen < BasePage
+class NativeViewScreen < BaseScreen
   include Helper
 
   element :btn_chained_view, "xpath://android.widget.TextView[@content-desc='chainedView']", "locator:ios"

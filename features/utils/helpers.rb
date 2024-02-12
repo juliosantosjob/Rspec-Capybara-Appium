@@ -45,10 +45,8 @@ module Helper
   end
 
   def move_with_drag(locator_one, locator_two, timeout: 2500)
-    mv = Appium::TouchAction.new
-
     begin
-      mv.long_press(element: locator_one)
+      Appium::TouchAction.new.long_press(element: locator_one)
         .wait(timeout)
         .move_to(element: locator_two)
         .release
@@ -70,16 +68,22 @@ module Helper
   end
 
   def double_tap(locator)
-    dbl = Appium::TouchAction.new
-
     begin
-      dbl.tap(element: locator, count: 2).perform
+      Appium::TouchAction.new.tap(element: locator, count: 2).perform
     rescue => e
       raise ArgumentError, "An error occurred while performing the double tap: #{e.message}"
     end
   end
 
-  def do_swipe(locator_one, direction, locator_two = nil, timeout = 5000)
+  def long_press(locator)
+    begin
+      Appium::TouchAction.new.long_press(element: locator).perform
+    rescue => e
+      raise ArgumentError, "An error occurred while performing the long press: #{e.message}"
+    end
+  end
+
+  def do_a_swipe(locator_one, direction, locator_two = nil, timeout = 5000)
     begin
       args_direction = %w[
         to

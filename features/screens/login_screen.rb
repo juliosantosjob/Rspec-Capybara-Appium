@@ -2,7 +2,7 @@ require_relative "../support/capy"
 require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class LoginScreen < BasePage
+class LoginScreen < BaseScreen
   include Helper
 
   element :btn_login, "accessibility_id:login", "locator:ios"
