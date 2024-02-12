@@ -19,7 +19,6 @@ class LongPressScreen < BaseScreen
       type_and: :accessibility_id, locator_and: "longpress",
       type_ios: :id, locator_ios: "longpress_ios"
     )
-
     long_press(button_lps)
   end
 
