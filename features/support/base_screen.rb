@@ -1,6 +1,6 @@
 require_relative "capy"
 
-class BasePage < SitePrism::Page
+class BaseScreen < SitePrism::Page
   include SitePrism::DSL
   @@selector = { ANDROID: :id, IOS: :predicate }
 
@@ -30,7 +30,7 @@ class BasePage < SitePrism::Page
       selectors = find_args[0].split(":")
       return selectors[0].to_sym, selectors[1]
     else
-      return [BasePage.get_default_selector(platform), find_args[0]]
+      return [BaseScreen.get_default_selector(platform), find_args[0]]
     end
   end
 
