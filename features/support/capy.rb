@@ -7,7 +7,7 @@ require "allure-ruby-commons"
 require "capybara"
 require_relative "hooks"
 require_relative "instances"
-require_relative "reports"
+require_relative "screen_capture"
 
 ENV["PLATFORM"] ||= "ANDROID"
 
