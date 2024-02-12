@@ -19,7 +19,6 @@ class SliderScreen < BaseScreen
       type_and: :accessibility_id, locator_and: "slider",
       type_ios: :id, locator_ios: "slider_ios"
     )
-
     do_a_swipe(slider_one, "screen_right")
   end
 
@@ -28,7 +27,6 @@ class SliderScreen < BaseScreen
       type_and: :accessibility_id, locator_and: "slider1",
       type_ios: :id, locator_ios: "slider_ios"
     )
-
     do_a_swipe(slider_two, "screen_right")
   end
 
