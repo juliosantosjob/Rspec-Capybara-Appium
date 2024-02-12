@@ -38,8 +38,7 @@ task :allure_open do
 end
 
 def download_app(url, filename)
-  unless Dir.exist?("app")
-    Dir.mkdir("app")
+  Dir.mkdir("app") unless Dir.exist?("app")
 
     response = HTTParty.get(url)
     file_path = File.join(__dir__, "app", filename)
