@@ -17,7 +17,7 @@ when "ANDROID"
 when "IOS"
   caps_file = "caps_ios.yml"
 else
-  raise "Error: The platform '#{ENV["PLATFORM"]}' is invalid!"
+  raise ArgumentError, "The platform '#{ENV["PLATFORM"]}' is invalid!"
 end
 
 desired_caps = YAML.load_file(File.join(__dir__, "caps", caps_file))
