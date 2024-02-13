@@ -11,7 +11,7 @@ RSpec.configure do |config|
 
       Capybara.current_session.driver.save_screenshot(shot_path)
     rescue StandardError => e
-      puts "Error: Unable to perform screenshot action! #{e.message}"
+      raise ArgumentError, "Error: Unable to perform screenshot action! #{e.message}"
     end
 
     Allure.add_attachment(
