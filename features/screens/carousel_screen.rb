@@ -28,7 +28,7 @@ class CarouselScreen < BaseScreen
     assert_visible(fld_title_carousel)
   end
 
-  def spin_the_carousel
+  def spin_the_carousel_ok
     views = find_element_by_platform(
       type_and: :xpath, locator_and: "//android.widget.TextView[@text='1']",
       type_ios: :id, locator_ios: "slider_ios"

@@ -9,6 +9,6 @@ RSpec.describe "Carousel", :regression do
 
   it "Checking carousel", :carousel do
     @carousel.access_carousel_screen
-    @carousel.spin_the_carousel
+    @carousel.spin_the_carousel_ok
   end
 end
