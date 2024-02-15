@@ -12,7 +12,7 @@ task :run, [:platform, :tag] do |task, args|
   elsif ENV["PLATFORM"] == "IOS"
     caps_file = "caps_ios.yml"
   else
-    raise "Error: The argument \"#{ENV["PLATFORM"]}\" is invalid!"
+    raise ArgumentError, "The argument \"#{ENV["PLATFORM"]}\" is invalid!"
   end
 
   desired_caps = YAML.load_file("features/support/caps/#{caps_file}")
