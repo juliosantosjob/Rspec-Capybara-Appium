@@ -25,35 +25,33 @@ task :run, [:platform, :tag] do |task, args|
   sh "rspec features/specs #{args.tag.nil? ? "" : "-t #{args.tag}"}"
 end
 
-desc "Auto-correct code"
+desc "Auto-correct Ruby code style"
 task :rubo do
   sh "rubocop --auto-correct"
 end
 
-desc "Add allure stories to the allure report"
+desc "Generate and serve Allure report with stories"
 task :allure_open do
   sh "allure generate --clean"
   sh "move allure-report/history allure-results/history"
   sh "allure serve"
 end
 
-def download_app(url, filename)
-  Dir.mkdir("app") unless Dir.exist?("app")
-
-  response = HTTParty.get(url)
-  file_path = File.join(__dir__, "app", filename)
-
-  File.open(file_path, "wb") do |file|
-    file.write(response.body)
-  end
-end
-
 desc "Download the app for Android project"
-task :android_build do
-  download_app("https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk", "VodQA.apk")
-end
+task :build do
+  task :android do
+    Dir.mkdir("app") unless Dir.exist?("app")
+    response = HTTParty.get("https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk")
 
-desc "Download the app for iOS project"
-task :ios_build do
-  download_app("https://example.com/path/to/app.ipa", "VodQA.ipa") #--> url download of project IPA
+    file_path = File.join(__dir__, "app", "VodQA.apk")
+    File.open(file_path, "wb") { |file| file.write(response.body) }
+  end
+
+  task :ios do
+    Dir.mkdir("app") unless Dir.exist?("app")
+    response = HTTParty.get("https://example.com/path/to/app.ipa")
+
+    file_path = File.join(__dir__, "app", "VodQA.ipa")
+    File.open(file_path, "wb") { |file| file.write(response.body) }
+  end
 end
