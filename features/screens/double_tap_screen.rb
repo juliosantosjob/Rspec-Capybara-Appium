@@ -19,7 +19,7 @@ class DoubleTapScreen < BaseScreen
       type_and: :accessibility_id, locator_and: "doubleTapMe",
       type_ios: :id, locator_ios: "double_tap_ios"
     )
-    
+
     double_tap(double_button)
   end
 
