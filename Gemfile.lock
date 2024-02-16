@@ -22,6 +22,7 @@ GEM
       faye-websocket (~> 0.11.0)
       selenium-webdriver (~> 4.2)
     base64 (0.2.0)
+    browserstack-local (1.4.3)
     capybara (3.40.0)
       addressable
       matrix
@@ -101,12 +102,13 @@ DEPENDENCIES
   allure-rspec
   allure-ruby-commons
   appium_capybara
-  appium_lib (~> 12.0)
-  appium_lib_core
+  appium_lib
+  browserstack-local
   capybara
   httparty
   rake
   rspec
+  selenium-webdriver
   site_prism
   yaml
 

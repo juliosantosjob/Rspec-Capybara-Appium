@@ -1,3 +1,5 @@
 /app/*.apk
 /allure-results
 /allure-report
+/features/support/caps/caps_android_bs.yml
+/features/support/caps/caps_ios_bs.yml

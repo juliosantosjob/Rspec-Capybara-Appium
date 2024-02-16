@@ -7,10 +7,15 @@ task :run, [:platform, :tag] do |task, args|
   args.platform ||= "ANDROID"
 
   ENV["PLATFORM"] = args.platform.upcase
-  if ENV["PLATFORM"] == "ANDROID"
+  case ENV["PLATFORM"]
+  when "ANDROID"
     caps_file = "caps_android.yml"
-  elsif ENV["PLATFORM"] == "IOS"
+  when "IOS"
     caps_file = "caps_ios.yml"
+  when "ANDROID_CLOUD"
+    caps_file = "caps_android_bs.yml"
+  when "IOS_CLOUD"
+    caps_file = "caps_ios_bs.yml"
   else
     raise ArgumentError, "The argument \"#{ENV["PLATFORM"]}\" is invalid!"
   end
@@ -37,8 +42,8 @@ task :allure_open do
   sh "allure serve"
 end
 
-desc "Download the app for Android project"
-task :build do
+desc "Download the app for project"
+namespace :build do
   task :android do
     Dir.mkdir("app") unless Dir.exist?("app")
     response = HTTParty.get("https://github.com/shridharkalagi/AppiumSample/raw/master/VodQA.apk")

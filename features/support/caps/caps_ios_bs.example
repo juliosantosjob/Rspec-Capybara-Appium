@@ -1,0 +1,10 @@
+caps:
+  platformName: "iOS"
+  deviceName: "iPhone 11 Simulator"
+  build: "E2E testing with Ruby"
+  device: "iPhone 11"
+  browserstack.debug: true
+  app: "seu_app_hash"
+
+appium_lib:
+  server_url: <%= "https://seu_usuario:seu_key@hub-cloud.browserstack.com/wd/hub" %>

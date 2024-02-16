@@ -28,7 +28,7 @@ class VerticalSwipingScreen < BaseScreen
       condition_element = false
     end
 
-    do_a_swipe(csharp_element, "screen_down") unless condition_element
+    do_a_swipe(locator_one: csharp_element, direction: "screen_down", timeout: 2000) unless condition_element
     assert_visible(fld_framework)
   end
 end

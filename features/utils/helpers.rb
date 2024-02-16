@@ -85,19 +85,13 @@ module Helper
     end
   end
 
-  def do_a_swipe(locator_one, direction, locator_two = nil, timeout = 500)
-    args_direction = %w[
-      to
-      screen_up
-      screen_down
-      screen_left
-      screen_right
-    ]
+  def do_a_swipe(params)
+    locator_one = params[:locator_one]
+    direction = params[:direction]
+    locator_two = params[:locator_two] || nil
 
-    raise ArgumentError, "Valid directions are: #{args_direction.join(', ')}" unless args_direction.include?(direction)
-
-    init_position_x = locator_one.location["x"] + locator_one.size["width"] / 2
-    init_position_y = locator_one.location["y"] + locator_one.size["height"] / 2
+    x_ = locator_one.location["x"] + locator_one.size["width"] / 2
+    y_ = locator_one.location["y"] + locator_one.size["height"] / 2
 
     case direction
     when "to"
@@ -121,15 +115,16 @@ module Helper
       y = locator_one.location["y"] + locator_one.size["height"] / 2
 
     else
-      raise ArgumentError, "Invalid direction '#{direction}'."
+      raise ArgumentError, "\"#{direction}\" direction argument is not invalid. Use one of the following arguments: " \
+        "[\"to\" \"screen_up\" \"screen_down\" \"screen_left\" \"screen_right\"]."
     end
 
     Appium::TouchAction.swipe(
-      :start_x => init_position_x,
-      :start_y => init_position_y,
+      :start_x => x_,
+      :start_y => y_,
       :end_x => x,
       :end_y => y,
-      :duration => timeout
+      :duration => params[:timeout] || 2000
     )
   end
 end

@@ -20,7 +20,7 @@ class SliderScreen < BaseScreen
       type_ios: :id, locator_ios: "slider_ios"
     )
 
-    do_a_swipe(slider_one, "screen_right")
+    do_a_swipe(locator_one: slider_one, direction: "screen_right", timeout: 2000)
   end
 
   def swipe_two
@@ -29,7 +29,7 @@ class SliderScreen < BaseScreen
       type_ios: :id, locator_ios: "slider_ios"
     )
 
-    do_a_swipe(slider_two, "screen_right")
+    do_a_swipe(locator_one: slider_two, direction: "screen_right", timeout: 2000)
   end
 
   def end_of_slide
