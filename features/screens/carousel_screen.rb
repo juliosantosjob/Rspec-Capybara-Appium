@@ -7,7 +7,7 @@ class CarouselScreen < BaseScreen
 
   element :btn_carousel, "xpath://android.widget.TextView[@content-desc='carousel']", "locator:ios"
   element :fld_title_carousel, "xpath://android.widget.TextView[@text='Carousel - Swipe left/right']", "locator:ios"
-  element :fld_view_two, "xpath://*[@text='2']", "locator:ios"
+  element :fld_view_three, "xpath://*[@text='3']", "locator:ios"
 
 
   def access_carousel_screen
@@ -35,6 +35,6 @@ class CarouselScreen < BaseScreen
     )
 
     do_a_swipe(locator_one: views, direction: "screen_right", timeout: 500)
-    assert_visible(fld_view_two)
+    assert_visible(fld_view_three)
   end
 end

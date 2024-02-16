@@ -4,28 +4,13 @@ require_relative "features/support/capy"
 
 desc "Exec project"
 task :run, [:platform, :tag] do |task, args|
-  args.platform ||= "ANDROID"
+  ENV["PLATFORM"] = args.platform
 
-  ENV["PLATFORM"] = args.platform.upcase
-  case ENV["PLATFORM"]
-  when "ANDROID"
-    caps_file = "caps_android.yml"
-  when "IOS"
-    caps_file = "caps_ios.yml"
-  when "ANDROID_CLOUD"
-    caps_file = "caps_android_bs.yml"
-  when "IOS_CLOUD"
-    caps_file = "caps_ios_bs.yml"
-  else
-    raise ArgumentError, "The argument \"#{ENV["PLATFORM"]}\" is invalid!"
-  end
-
-  desired_caps = YAML.load_file("features/support/caps/#{caps_file}")
-
+  caps, appium_lib = desired_caps
   puts "────────────────────────────────────────────────"
-  puts  "| Platform: #{desired_caps.dig("caps", "platformName")} \n" \
-        "| Device: #{desired_caps.dig("caps", "deviceName")} \n" \
-        "| Server: #{desired_caps.dig("appium_lib", "server_url")} \n" \
+  puts  "| Platform: #{caps.values[0]} \n" \
+        "| Device: #{caps.values[1]} \n" \
+        "| Server: #{appium_lib.values[0]} \n" \
         "────────────────────────────────────────────────\n"
   sh "rspec features/specs #{args.tag.nil? ? "" : "-t #{args.tag}"}"
 end

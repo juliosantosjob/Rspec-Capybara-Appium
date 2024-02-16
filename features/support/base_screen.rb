@@ -2,12 +2,12 @@ require_relative "capy"
 
 class BaseScreen < SitePrism::Page
   include SitePrism::DSL
-  @@selector = { ANDROID: :id, IOS: :predicate }
+  @@selector = { ANDROID: :id, IOS: :predicate, ANDROID_CLOUD: :id, IOS_CLOUD: :predicate }
 
   def self.get_default_selector(platform)
-    if platform.downcase == "android"
+    if platform.include?("android")
       return @@selector[:ANDROID]
-    elsif platform.downcase == "ios"
+    elsif platform.include?("ios")
       return @@selector[:IOS]
     else
       raise ArgumentError, "Wrong Platform name"
@@ -20,9 +20,9 @@ class BaseScreen < SitePrism::Page
 
   def self.find_platform_locator(*find_args)
     platform = ENV["PLATFORM"].upcase
-    if (find_args.length == 2) && (platform == "ANDROID")
+    if (find_args.length == 2) && platform.include?("ANDROID")
       find_args.delete_at(1)
-    elsif (find_args.length == 2) && (platform == "IOS")
+    elsif (find_args.length == 2) && platform.include?("IOS")
       find_args.delete_at(0)
     end
 

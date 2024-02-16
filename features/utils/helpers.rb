@@ -115,8 +115,9 @@ module Helper
       y = locator_one.location["y"] + locator_one.size["height"] / 2
 
     else
-      raise ArgumentError, "\"#{direction}\" direction argument is not invalid. Use one of the following arguments: " \
-        "[\"to\" \"screen_up\" \"screen_down\" \"screen_left\" \"screen_right\"]."
+      raise ArgumentError, "\"#{direction}\" direction argument is not invalid. " \
+        "Use one of the following arguments: [\"to\" \"screen_up\" \"screen_down\" " \
+        "\"screen_left\" \"screen_right\"]."
     end
 
     Appium::TouchAction.swipe(

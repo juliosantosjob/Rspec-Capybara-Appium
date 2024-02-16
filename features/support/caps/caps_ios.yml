@@ -1,9 +1,0 @@
-caps:
-  platformName: "iOS"
-  deviceName: "iPhone Simulator"
-  automationName: "XCUITest"
-  app: "./app/VodQA.app"
-  udid: "auto"
-
-appium_lib:
-  server_url: "http://localhost:4723/wd/hub"
