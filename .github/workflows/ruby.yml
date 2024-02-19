@@ -25,7 +25,7 @@ jobs:
       run: rake rubo
    
     - name: Run tests
-      run: rake run[android_cluod]
+      run: rake run[android_cloud]
 
     - name: Get Allure history
       uses: actions/checkout@v2
