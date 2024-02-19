@@ -7,7 +7,6 @@ RSpec.configure do |config|
     @slider ||= SliderScreen.new
     @vertical_swiping ||= VerticalSwipingScreen.new
     @drag_and_drop ||= DragAndDropScreen.new
-    @double_tap ||= DoubleTapScreen.new
     @long_press ||= LongPressScreen.new
     @carousel ||= CarouselScreen.new
   end

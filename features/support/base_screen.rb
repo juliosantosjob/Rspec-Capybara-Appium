@@ -5,9 +5,10 @@ class BaseScreen < SitePrism::Page
   @@selector = { ANDROID: :id, IOS: :predicate, ANDROID_CLOUD: :id, IOS_CLOUD: :predicate }
 
   def self.get_default_selector(platform)
-    if platform.include?("android")
+    case platform.downcase
+    when "android", "android_cloud"
       return @@selector[:ANDROID]
-    elsif platform.include?("ios")
+    when "ios", "ios_cloud"
       return @@selector[:IOS]
     else
       raise ArgumentError, "Wrong Platform name"
@@ -15,7 +16,7 @@ class BaseScreen < SitePrism::Page
   end
 
   def self.set_default_selector(android, ios)
-    @@selector = { ANDROID: android, IOS: ios }
+    @@selector = { ANDROID: android, IOS: ios, ANDROID_CLOUD: android_cloud, IOS_CLOUD: ios_cloud }
   end
 
   def self.find_platform_locator(*find_args)

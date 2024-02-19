@@ -89,6 +89,7 @@ module Helper
     locator_one = params[:locator_one]
     direction = params[:direction]
     locator_two = params[:locator_two] || nil
+    margin_percentage = params[:margin_percentage] || 10
 
     x_ = locator_one.location["x"] + locator_one.size["width"] / 2
     y_ = locator_one.location["y"] + locator_one.size["height"] / 2
@@ -111,7 +112,7 @@ module Helper
       y = locator_one.location["y"] + locator_one.size["height"] / 2
 
     when "screen_right"
-      x = get_screen_size.width
+      x = get_screen_size.width - margin_percentage
       y = locator_one.location["y"] + locator_one.size["height"] / 2
 
     else
