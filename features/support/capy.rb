@@ -1,4 +1,5 @@
 require "rspec"
+require "rubygems"
 require "appium_capybara"
 require "site_prism"
 require "yaml"
