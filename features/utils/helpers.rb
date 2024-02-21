@@ -86,56 +86,67 @@ module Helper
   end
 
   def do_a_swipe(params = {})
-    raise ArgumentError, "\"from\" is required parameter for using the [do_a_swipe]." unless params[:from]
-    raise ArgumentError, "\"direction\" is required parameter for using the [do_a_swipe]." unless params[:direction]
+    raise ArgumentError, "\"from\" is a required parameter for using the [do_a_swipe]." unless params[:from]
+    raise ArgumentError, "\"direction\" is a required parameter for using the [do_a_swipe]." unless params[:direction]
 
     from = params[:from]
     to = params[:to]
     direction = params[:direction]
 
-    Appium::TouchAction.swipe(
-      **get_options(from, "element_from"),
-      **get_options(from, direction),
-      :duration => params[:timeout],
-    )
-  end
+    def get_options(element_init, direction)
+      case direction
+      when "element_from"
+        return {
+                 start_x: element_init.location["x"] + element_init.size["width"] / 2,
+                 start_y: element_init.location["y"] + element_init.size["height"] / 2,
+               }
+      when "to"
+        return {
+                 start_x: to.location["x"] + to.size["width"] / 2,
+                 start_y: to.location["y"] + to.size["height"] / 2,
+               }
+      when "screen_center"
+        return {
+                 start_x: get_screen_size.width / 2,
+                 start_y: get_screen_size.height / 2,
+               }
+      when "screen_up"
+        return {
+                 end_x: element_init.location["x"] + element_init.size["width"] / 2,
+                 end_y: get_screen_size.height,
+               }
+      when "screen_down"
+        return {
+                 end_x: element_init.location["x"] + element_init.size["width"] / 2,
+                 end_y: 0,
+               }
+      when "screen_left"
+        return {
+                 end_x: 0,
+                 end_y: element_init.location["y"] + element_init.size["height"] / 2,
+               }
+      when "screen_right"
+        return {
+                 end_x: get_screen_size.width - 1,
+                 end_y: element_init.location["y"] + element_init.size["height"] / 2,
+               }
+      else
+        raise ArgumentError, "\"#{direction}\" direction argument is invalid."
+      end
+    end
 
-  def get_options(element_init, direction)
-    case direction
-    when "element_from"
-      return {
-               :start_x => element_init.location["x"] + element_init.size["width"] / 2,
-               :start_y => element_init.location["y"] + element_init.size["height"] / 2,
-             }
-    when "screen_center"
-      return {
-               :start_x => get_screen_size.width / 2,
-               :start_y => get_screen_size.height / 2,
-             }
-    when "screen_up"
-      return {
-               :end_x => element_init.location["x"] + element_init.size["width"] / 2,
-               :end_y => get_screen_size.height,
-             }
-    when "screen_down"
-      return {
-               :end_x => element_init.location["x"] + element_init.size["width"] / 2,
-               :end_y => 0,
-             }
-    when "screen_left"
-      return {
-               :end_x => 0,
-               :end_y => element_init.location["y"] + element_init.size["height"] / 2,
-             }
-    when "screen_right"
-      return {
-               :end_x => get_screen_size.width,
-               :end_y => element_init.location["y"] + element_init.size["height"] / 2,
-             }
+    unless to
+      Appium::TouchAction.swipe(
+        **get_options(from, "element_from"),
+        **get_options(from, direction),
+        duration: params[:timeout],
+      )
     else
-      raise ArgumentError, "\"#{direction}\" direction argument is invalid. " \
-            "Use one of the following arguments: [\"to\", \"screen_up\", \"screen_down\", " \
-            "\"screen_left\", \"screen_right\"]."
+      Appium::TouchAction.swipe(
+        **get_options(from, "element_from"),
+        **get_options(from, "to"),
+        duration: params[:timeout],
+      )
     end
   end
 end
