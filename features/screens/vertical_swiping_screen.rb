@@ -19,7 +19,7 @@ class VerticalSwipingScreen < BaseScreen
   def do_a_swipe_success
     csharp_element = find_element_by_platform(
       type_and: :xpath, locator_and: "//*[@text=' C#']",
-      type_ios: :id, locator_ios: "slider_ios"
+      type_ios: :id, locator_ios: "slider_ios",
     )
 
     begin
@@ -28,7 +28,7 @@ class VerticalSwipingScreen < BaseScreen
       condition_element = false
     end
 
-    do_a_swipe(locator_one: csharp_element, direction: "screen_down", timeout: 2000) unless condition_element
+    do_a_swipe({ from: csharp_element, direction: "screen_down", timeout: 2000 }) unless condition_element
     assert_visible(fld_framework)
   end
 end

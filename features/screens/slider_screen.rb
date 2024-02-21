@@ -17,19 +17,19 @@ class SliderScreen < BaseScreen
   def swipe_one
     slider_one = find_element_by_platform(
       type_and: :accessibility_id, locator_and: "slider",
-      type_ios: :id, locator_ios: "slider_ios"
+      type_ios: :id, locator_ios: "slider_ios",
     )
 
-    do_a_swipe(locator_one: slider_one, direction: "screen_right", timeout: 2000)
+    do_a_swipe({ from: slider_one, direction: "screen_right", timeout: 2000 })
   end
 
   def swipe_two
     slider_two = find_element_by_platform(
       type_and: :accessibility_id, locator_and: "slider1",
-      type_ios: :id, locator_ios: "slider_ios"
+      type_ios: :id, locator_ios: "slider_ios",
     )
 
-    do_a_swipe(locator_one: slider_two, direction: "screen_right", timeout: 2000)
+    do_a_swipe({ from: slider_two, direction: "screen_right", timeout: 2000 })
   end
 
   def end_of_slide

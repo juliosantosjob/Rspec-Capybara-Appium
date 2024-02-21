@@ -65,7 +65,7 @@ module Helper
       end
     rescue
       raise ArgumentError, "Unable to find the element with locator: " \
-      "\"#{platform.include?("android") ? args[:locator_and] : args[:locator_ios]}\""
+            "\"#{platform.include?("android") ? args[:locator_and] : args[:locator_ios]}\""
     end
   end
 
@@ -85,48 +85,57 @@ module Helper
     end
   end
 
-  def do_a_swipe(params)
-    locator_one = params[:locator_one]
+  def do_a_swipe(params = {})
+    raise ArgumentError, "\"from\" is required parameter for using the [do_a_swipe]." unless params[:from]
+    raise ArgumentError, "\"direction\" is required parameter for using the [do_a_swipe]." unless params[:direction]
+
+    from = params[:from]
+    to = params[:to]
     direction = params[:direction]
-    locator_two = params[:locator_two] || nil
-    margin_percentage = params[:margin_percentage] || 10
-
-    x_ = locator_one.location["x"] + locator_one.size["width"] / 2
-    y_ = locator_one.location["y"] + locator_one.size["height"] / 2
-
-    case direction
-    when "to"
-      x = locator_two.location["x"] + locator_two.size["width"] / 2
-      y = locator_two.location["y"] + locator_two.size["height"] / 2
-
-    when "screen_up"
-      x = locator_one.location["x"] + locator_one.size["width"] / 2
-      y = get_screen_size.height
-
-    when "screen_down"
-      x = locator_one.location["x"] + locator_one.size["width"] / 2
-      y = 0
-
-    when "screen_left"
-      x = 0
-      y = locator_one.location["y"] + locator_one.size["height"] / 2
-
-    when "screen_right"
-      x = get_screen_size.width - margin_percentage
-      y = locator_one.location["y"] + locator_one.size["height"] / 2
-
-    else
-      raise ArgumentError, "\"#{direction}\" direction argument is not invalid. " \
-        "Use one of the following arguments: [\"to\" \"screen_up\" \"screen_down\" " \
-        "\"screen_left\" \"screen_right\"]."
-    end
 
     Appium::TouchAction.swipe(
-      :start_x => x_,
-      :start_y => y_,
-      :end_x => x,
-      :end_y => y,
-      :duration => params[:timeout] || 2000
+      **get_options(from, "element_from"),
+      **get_options(from, direction),
+      :duration => params[:timeout],
     )
+  end
+
+  def get_options(element_init, direction)
+    case direction
+    when "element_from"
+      return {
+               :start_x => element_init.location["x"] + element_init.size["width"] / 2,
+               :start_y => element_init.location["y"] + element_init.size["height"] / 2,
+             }
+    when "screen_center"
+      return {
+               :start_x => get_screen_size.width / 2,
+               :start_y => get_screen_size.height / 2,
+             }
+    when "screen_up"
+      return {
+               :end_x => element_init.location["x"] + element_init.size["width"] / 2,
+               :end_y => get_screen_size.height,
+             }
+    when "screen_down"
+      return {
+               :end_x => element_init.location["x"] + element_init.size["width"] / 2,
+               :end_y => 0,
+             }
+    when "screen_left"
+      return {
+               :end_x => 0,
+               :end_y => element_init.location["y"] + element_init.size["height"] / 2,
+             }
+    when "screen_right"
+      return {
+               :end_x => get_screen_size.width,
+               :end_y => element_init.location["y"] + element_init.size["height"] / 2,
+             }
+    else
+      raise ArgumentError, "\"#{direction}\" direction argument is invalid. " \
+            "Use one of the following arguments: [\"to\", \"screen_up\", \"screen_down\", " \
+            "\"screen_left\", \"screen_right\"]."
+    end
   end
 end
