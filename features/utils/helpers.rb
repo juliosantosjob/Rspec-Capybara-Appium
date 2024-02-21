@@ -93,60 +93,60 @@ module Helper
     to = params[:to]
     direction = params[:direction]
 
-    def get_options(element_init, direction)
-      case direction
-      when "element_from"
-        return {
-                 start_x: element_init.location["x"] + element_init.size["width"] / 2,
-                 start_y: element_init.location["y"] + element_init.size["height"] / 2,
-               }
-      when "to"
-        return {
-                 start_x: to.location["x"] + to.size["width"] / 2,
-                 start_y: to.location["y"] + to.size["height"] / 2,
-               }
-      when "screen_center"
-        return {
-                 start_x: get_screen_size.width / 2,
-                 start_y: get_screen_size.height / 2,
-               }
-      when "screen_up"
-        return {
-                 end_x: element_init.location["x"] + element_init.size["width"] / 2,
-                 end_y: get_screen_size.height,
-               }
-      when "screen_down"
-        return {
-                 end_x: element_init.location["x"] + element_init.size["width"] / 2,
-                 end_y: 0,
-               }
-      when "screen_left"
-        return {
-                 end_x: 0,
-                 end_y: element_init.location["y"] + element_init.size["height"] / 2,
-               }
-      when "screen_right"
-        return {
-                 end_x: get_screen_size.width - 1,
-                 end_y: element_init.location["y"] + element_init.size["height"] / 2,
-               }
-      else
-        raise ArgumentError, "\"#{direction}\" direction argument is invalid."
-      end
-    end
-
-    unless to
+    if to
       Appium::TouchAction.swipe(
         **get_options(from, "element_from"),
-        **get_options(from, direction),
+        **get_options(from, "to", to),
         duration: params[:timeout],
       )
     else
       Appium::TouchAction.swipe(
         **get_options(from, "element_from"),
-        **get_options(from, "to"),
+        **get_options(from, direction),
         duration: params[:timeout],
       )
+    end
+  end
+
+  def get_options(element_init, direction, to = nil)
+    case direction
+    when "element_from"
+      return {
+        start_x: element_init.location["x"] + element_init.size["width"] / 2,
+        start_y: element_init.location["y"] + element_init.size["height"] / 2
+      }
+    when "to"
+      return {
+        start_x: to.location["x"] + to.size["width"] / 2,
+        start_y: to.location["y"] + to.size["height"] / 2
+      }
+    when "screen_center"
+      return {
+        start_x: get_screen_size.width / 2,
+        start_y: get_screen_size.height / 2
+      }
+    when "screen_up"
+      return {
+        end_x: element_init.location["x"] + element_init.size["width"] / 2,
+        end_y: get_screen_size.height
+      }
+    when "screen_down"
+      return {
+        end_x: element_init.location["x"] + element_init.size["width"] / 2,
+        end_y: 0
+      }
+    when "screen_left"
+      return {
+        end_x: 0,
+        end_y: element_init.location["y"] + element_init.size["height"] / 2
+      }
+    when "screen_right"
+      return {
+        end_x: get_screen_size.width - 1,
+        end_y: element_init.location["y"] + element_init.size["height"] / 2
+      }
+    else
+      raise ArgumentError, "\"#{direction}\" direction argument is invalid."
     end
   end
 end

@@ -72,3 +72,6 @@ convention:Metrics/PerceivedComplexity:
 
 convention:Metrics/ModuleLength:
   Enabled: false
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
