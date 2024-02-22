@@ -94,13 +94,13 @@ module Helper
     direction = params[:direction]
 
     if to
-      Appium::TouchAction.swipe(
+      Appium::TouchAction.new($driver).swipe(
         **get_options(from, "element_from"),
         **get_options(from, "to", to),
         duration: params[:timeout],
       )
     else
-      Appium::TouchAction.swipe(
+      Appium::TouchAction.new($driver).swipe(
         **get_options(from, "element_from"),
         **get_options(from, direction),
         duration: params[:timeout],

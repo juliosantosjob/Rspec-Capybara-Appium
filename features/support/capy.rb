@@ -1,18 +1,16 @@
 require "rspec"
+require "rspec/retry"
 require "appium_capybara"
 require "site_prism"
 require "yaml"
 require "allure-rspec"
 require "rubocop"
+require "appium_lib"
 require "browserstack/local"
 require_relative "hooks"
 require_relative "instances"
 require_relative "screen_capture"
 require_relative "capabilities"
-
-ENV["HASH_USER"] = "bs://1a4806c03f9f7a42c350791dc3372ca0ed834dfa"
-ENV["USER_BS"] = "nametest_CZgRBq"
-ENV["HASH_KEY"] = "wgdJ6eNqMsyexkVUwhzp"
 
 Capybara.register_driver(:appium) do |app|
   caps, appium_lib = desired_caps
@@ -26,6 +24,14 @@ Capybara.configure do |config|
 end
 
 RSpec.configure do |config|
+  config.verbose_retry = true
+  config.default_retry_count = ENV["RETRIES"]
+  config.default_sleep_interval = 1
+
+  config.around :each do |exemplo|
+    exemplo.run_with_retry retry: ENV["RETRIES"]
+  end
+
   config.formatter = AllureRspecFormatter
 end
 
