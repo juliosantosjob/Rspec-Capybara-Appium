@@ -5,6 +5,10 @@ on:
   pull_request:
     branches:
       - main
+  
+  schedule:
+  - cron: "0 12,20 * * 1-5"
+
 
 jobs:
   tests-e2e:
