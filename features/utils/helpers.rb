@@ -117,13 +117,13 @@ module Helper
       }
     when "to"
       return {
-        start_x: to.location["x"] + to.size["width"] / 2,
-        start_y: to.location["y"] + to.size["height"] / 2
+        end_x: to.location["x"] + to.size["width"] / 2,
+        end_y: to.location["y"] + to.size["height"] / 2
       }
     when "screen_center"
       return {
-        start_x: get_screen_size.width / 2,
-        start_y: get_screen_size.height / 2
+        end_x: get_screen_size.width / 2,
+        end_y: get_screen_size.height / 2
       }
     when "screen_up"
       return {
