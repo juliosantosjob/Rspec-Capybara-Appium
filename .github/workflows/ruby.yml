@@ -26,7 +26,7 @@ jobs:
       run: bundle install
 
     - name: Rubocop verify
-      run: rubocop
+      run: rake rubo
    
     - name: Run tests
       run: rake run[android_cloud]
