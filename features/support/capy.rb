@@ -28,7 +28,7 @@ RSpec.configure do |config|
   config.formatter = AllureRspecFormatter
 end
 
-AllureRspec.configure do |config|
+Allure.configure do |config|
   config.results_directory = "allure-results"
   config.clean_results_directory = true
 end
