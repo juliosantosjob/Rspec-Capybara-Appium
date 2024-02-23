@@ -94,6 +94,8 @@ module Helper
       raise ArgumentError, "\"from\" is a required parameter for using the [do_a_swipe]."
     end
 
+    to = params[:to] if params[:to]
+
     if params[:direction]
       direction = params[:direction]
     else
@@ -101,19 +103,27 @@ module Helper
     end
 
     dirs = direction.split("->")
-    Appium::TouchAction.swipe(
-      **get_options(from, dirs[0]),
-      **get_options(from, dirs[1]),
-      duration: params[:timeout],
-    )
+    if to
+      Appium::TouchAction.swipe(
+        **get_options(from, dirs[0]),
+        **get_options(from, to),
+        duration: params[:timeout],
+      )
+    else
+      Appium::TouchAction.swipe(
+        **get_options(from, dirs[0]),
+        **get_options(from, dirs[1]),
+        duration: params[:timeout],
+      )
+    end
   end
 
-  def get_options(element_init, direction)
+  def get_options(anchor_element, direction)
     case direction.delete(" ")
     when "element_from"
       return {
-        start_x: element_init.location["x"] + element_init.size["width"] / 2,
-        start_y: element_init.location["y"] + element_init.size["height"] / 2
+        start_x: anchor_element.location["x"] + anchor_element.size["width"] / 2,
+        start_y: anchor_element.location["y"] + anchor_element.size["height"] / 2
       }
     when "to"
       return {
@@ -127,23 +137,23 @@ module Helper
       }
     when "screen_up"
       return {
-        end_x: element_init.location["x"] + element_init.size["width"] / 2,
+        end_x: anchor_element.location["x"] + anchor_element.size["width"] / 2,
         end_y: get_screen_size.height
       }
     when "screen_down"
       return {
-        end_x: element_init.location["x"] + element_init.size["width"] / 2,
+        end_x: anchor_element.location["x"] + anchor_element.size["width"] / 2,
         end_y: 0
       }
     when "screen_left"
       return {
         end_x: 0,
-        end_y: element_init.location["y"] + element_init.size["height"] / 2
+        end_y: anchor_element.location["y"] + anchor_element.size["height"] / 2
       }
     when "screen_right"
       return {
         end_x: get_screen_size.width,
-        end_y: element_init.location["y"] + element_init.size["height"] / 2
+        end_y: anchor_element.location["y"] + anchor_element.size["height"] / 2
       }
     else
       raise ArgumentError, "\"#{direction}\" direction argument is invalid."

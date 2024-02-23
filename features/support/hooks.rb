@@ -6,7 +6,7 @@ def print_test_result(example)
   status = example.exception.nil? ? "\e[32m\u2713" : "\e[31m\u2717"
 
   puts "────────────────────────────────────────────────"
-  puts "[#{status}\e[0m ] > #{name_feature} > #{name_test}" \
+  puts "[#{status}\e[0m] > #{name_feature} > #{name_test}" \
 
   puts "\e[31mError: #{example.exception}\e[0m" if example.exception
   puts example.exception.backtrace.join("\n") if example.exception
