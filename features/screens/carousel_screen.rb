@@ -21,7 +21,7 @@ class CarouselScreen < BaseScreen
       condition_element = false
     end
 
-    do_a_swipe({ from: scroll_down, direction: "screen_down", timeout: 1000 }) unless condition_element
+    do_a_swipe({ from: scroll_down, direction: "element_from -> screen_down", timeout: 1000 }) unless condition_element
 
     wait_and_tap(btn_carousel, 5)
     assert_visible(fld_title_carousel)
@@ -33,7 +33,7 @@ class CarouselScreen < BaseScreen
       type_ios: :id, locator_ios: "slider_ios",
     )
 
-    do_a_swipe({ from: views, direction: "screen_right", timeout: 500 })
+    do_a_swipe({ from: views, direction: "element_from -> screen_right", timeout: 500 })
     assert_visible(fld_view_three)
   end
 end

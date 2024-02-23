@@ -41,7 +41,7 @@ module Helper
   end
 
   def get_screen_size
-    Capybara.current_session.driver.appium_driver.window_size
+    return Capybara.current_session.driver.appium_driver.window_size - 1
   end
 
   def move_with_drag(locator_one, locator_two, timeout: 2500)
@@ -86,30 +86,30 @@ module Helper
   end
 
   def do_a_swipe(params = {})
-    raise ArgumentError, "\"from\" is a required parameter for using the [do_a_swipe]." unless params[:from]
-    raise ArgumentError, "\"direction\" is a required parameter for using the [do_a_swipe]." unless params[:direction]
+    direction = "element_from -> screen_center"
 
-    from = params[:from]
-    to = params[:to]
-    direction = params[:direction]
-
-    if to
-      Appium::TouchAction.new($driver).swipe(
-        **get_options(from, "element_from"),
-        **get_options(from, "to", to),
-        duration: params[:timeout],
-      )
+    if params[:from]
+      from = params[:from]
     else
-      Appium::TouchAction.new($driver).swipe(
-        **get_options(from, "element_from"),
-        **get_options(from, direction),
-        duration: params[:timeout],
-      )
+      raise ArgumentError, "\"from\" is a required parameter for using the [do_a_swipe]."
     end
+
+    if params[:direction]
+      direction = params[:direction]
+    else
+      raise ArgumentError, "\"direction\" is a required parameter for using the [do_a_swipe]."
+    end
+
+    dirs = direction.split("->")
+    Appium::TouchAction.swipe(
+      **get_options(from, dirs[0]),
+      **get_options(from, dirs[1]),
+      duration: params[:timeout],
+    )
   end
 
-  def get_options(element_init, direction, to = nil)
-    case direction
+  def get_options(element_init, direction)
+    case direction.delete(" ")
     when "element_from"
       return {
         start_x: element_init.location["x"] + element_init.size["width"] / 2,
@@ -142,7 +142,7 @@ module Helper
       }
     when "screen_right"
       return {
-        end_x: get_screen_size.width - 1,
+        end_x: get_screen_size.width,
         end_y: element_init.location["y"] + element_init.size["height"] / 2
       }
     else
