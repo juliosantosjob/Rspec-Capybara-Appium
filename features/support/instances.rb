@@ -1,7 +1,7 @@
 require_relative "capy"
 
 RSpec.configure do |config|
-  ENV["HASH_USER"] = "bs://1a4806c03f9f7a42c350791dc3372ca0ed834dfa"
+  ENV["HASH_USER"] = "bs://32ee29e3900e778f8c4eb5543d38382c5f94e814"
   ENV["USER_BS"] = "nametest_xUmHeN"
   ENV["USER_KEY"] = "ujyrk3C1THqy6y5WXBdW"
   ENV["RETRIES"] = 0.to_s
