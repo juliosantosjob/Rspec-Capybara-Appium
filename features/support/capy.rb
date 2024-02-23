@@ -32,7 +32,7 @@ RSpec.configure do |config|
     exemplo.run_with_retry retry: ENV["RETRIES"]
   end
 
-  config.formatter = AllureRspecFormatter
+  config.add_formatter("AllureRspecFormatter")
 end
 
 Allure.configure do |config|

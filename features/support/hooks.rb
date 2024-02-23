@@ -8,8 +8,11 @@ def print_test_result(example)
   puts "────────────────────────────────────────────────"
   puts "[#{status}\e[0m] > #{name_feature} > #{name_test}" \
 
-  puts "\e[31mError: #{example.exception}\e[0m" if example.exception
-  puts example.exception.backtrace.join("\n") if example.exception
+  if example.exception
+    RSpec.configure { |config| config.add_formatter("documentation") }
+    puts "\e[31mError: #{example.exception}\e[0m"
+    puts example.exception.backtrace.join("\n")
+  end
 end
 
 RSpec.configure do |config|
