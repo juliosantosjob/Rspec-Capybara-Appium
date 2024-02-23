@@ -25,7 +25,7 @@ def desired_caps
     caps[:build] = "E2e testing with ruby"
     caps[:device] = "Google Pixel 4"
     caps[:app] = ENV["HASH_USER"]
-    appium_lib[:server_url] = "https://#{ENV["USER_BS"]}:#{ENV["HASH_KEY"]}@hub-cloud.browserstack.com/wd/hub"
+    appium_lib[:server_url] = "https://#{ENV["USER_BS"]}:#{ENV["USER_KEY"]}@hub-cloud.browserstack.com/wd/hub"
 
   when "IOS_CLOUD"
     caps[:platformName] = "iOS"
@@ -33,7 +33,7 @@ def desired_caps
     caps[:platformVersion] = "14.0"
     caps[:automationName] = "XCUITest"
     caps[:app] = ENV["HASH_USER"]
-    appium_lib[:server_url] = "https://#{ENV["USER_BS"]}:#{ENV["HASH_KEY"]}@hub-cloud.browserstack.com/wd/hub"
+    appium_lib[:server_url] = "https://#{ENV["USER_BS"]}:#{ENV["USER_KEY"]}@hub-cloud.browserstack.com/wd/hub"
 
   else
     raise ArgumentError, "The platform '#{ENV["PLATFORM"]}' is invalid!"
