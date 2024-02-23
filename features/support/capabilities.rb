@@ -2,6 +2,11 @@ def desired_caps
   caps = {}
   appium_lib = {}
 
+  ENV["BS_HASH"] = "bs://32ee29e3900e778f8c4eb5543d38382c5f94e814"
+  ENV["BS_USER"] = "nametest_xUmHeN"
+  ENV["BS_KEY"] = "ujyrk3C1THqy6y5WXBdW"
+  ENV["RETRIES"] = 0.to_s
+
   case ENV["PLATFORM"].upcase
   when "ANDROID"
     caps[:platformName] = "Android"
@@ -24,16 +29,16 @@ def desired_caps
     caps[:deviceName] = "Emulator Android"
     caps[:build] = "E2e testing with ruby"
     caps[:device] = "Google Pixel 4"
-    caps[:app] = ENV["HASH_USER"]
-    appium_lib[:server_url] = "https://#{ENV["USER_BS"]}:#{ENV["USER_KEY"]}@hub-cloud.browserstack.com/wd/hub"
+    caps[:app] = ENV["BS_HASH"]
+    appium_lib[:server_url] = "https://#{ENV["BS_USER"]}:#{ENV["BS_KEY"]}@hub-cloud.browserstack.com/wd/hub"
 
   when "IOS_CLOUD"
     caps[:platformName] = "iOS"
     caps[:deviceName] = "Emulator IPhone"
     caps[:platformVersion] = "14.0"
     caps[:automationName] = "XCUITest"
-    caps[:app] = ENV["HASH_USER"]
-    appium_lib[:server_url] = "https://#{ENV["USER_BS"]}:#{ENV["USER_KEY"]}@hub-cloud.browserstack.com/wd/hub"
+    caps[:app] = ENV["BS_HASH"]
+    appium_lib[:server_url] = "https://#{ENV["BS_USER"]}:#{ENV["BS_KEY"]}@hub-cloud.browserstack.com/wd/hub"
 
   else
     raise ArgumentError, "The platform '#{ENV["PLATFORM"]}' is invalid!"
