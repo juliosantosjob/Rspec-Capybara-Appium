@@ -2,7 +2,7 @@ require 'httparty'
 
 base_url = "https://api-cloud.browserstack.com"
 
-response = HTTParty.post("#{base_url}/app-automate/espresso/v2/upload",
+response = HTTParty.post("#{base_url}/app-live/upload",
     basic_auth: { 
         username: ENV["BS_USER"], 
         password: ENV["BS_KEY"] 
