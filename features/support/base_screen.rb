@@ -15,7 +15,7 @@ class BaseScreen < SitePrism::Page
     end
   end
 
-  def self.set_default_selector(android, ios)
+  def self.set_default_selector(android, ios, android_cloud, ios_cloud)
     @@selector = { ANDROID: android, IOS: ios, ANDROID_CLOUD: android_cloud, IOS_CLOUD: ios_cloud }
   end
 
