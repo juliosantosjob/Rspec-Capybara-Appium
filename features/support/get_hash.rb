@@ -1,9 +1,11 @@
 require 'httparty'
 
-url = "https://api-cloud.browserstack.com/app-automate/espresso/v2/upload"
-auth = { username: ENC["BS_USER"], password: ENV["BS_KEY"] }
-file_path = "/caminho/do/seu/arquivo.apk"
+base_url = "https://api-cloud.browserstack.com"
 
-response = HTTParty.post(url, basic_auth: auth, body: { file: File.new(file_path) })
+response = HTTParty.post("#{base_url}/app-automate/espresso/v2/upload"
+    basic_auth: { username: ENC["BS_USER"], password: ENV["BS_KEY"] }, 
+    body: { file: File.new("/caminho/do/seu/arquivo.apk")
+    headers: { "Content-Typ" : "multipart/form-data" }
+})
 
 puts response.body
