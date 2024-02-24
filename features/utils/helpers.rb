@@ -126,8 +126,8 @@ module Helper
       }
     when "to"
       return {
-        end_x: to.location["x"] + to.size["width"] / 2,
-        end_y: to.location["y"] + to.size["height"] / 2
+        end_x: anchor_element.location["x"] + to.size["width"] / 2,
+        end_y: anchor_element.location["y"] + to.size["height"] / 2
       }
     when "screen_center"
       return {
