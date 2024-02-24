@@ -1,15 +1,9 @@
-require "httparty"
+require 'httparty'
 
-url = "https://api-cloud.browserstack.com/app-automate/upload"
-file_path = "./app/VodQA.apk"
-custom_id = "SampleApp"
+url = "https://api-cloud.browserstack.com/app-automate/espresso/v2/upload"
+auth = { username: ENC["BS_USER"], password: ENV["BS_KEY"] }
+file_path = "/caminho/do/seu/arquivo.apk"
 
-response = HTTParty.post(url,
-                         basic_auth: { username: ENV["USER_BS"], password: ENV["USER_KEY"] },
-                         body: {
-                           file: File.new(file_path),
-                           custom_id: custom_id,
-                           ios_keychain_support: true
-                         })
+response = HTTParty.post(url, basic_auth: auth, body: { file: File.new(file_path) })
 
 puts response.body
