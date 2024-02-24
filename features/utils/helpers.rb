@@ -95,7 +95,6 @@ module Helper
     end
 
     to = params[:to] if params[:to]
-
     if params[:direction]
       direction = params[:direction]
     else
