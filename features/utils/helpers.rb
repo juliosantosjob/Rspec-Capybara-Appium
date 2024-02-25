@@ -111,8 +111,8 @@ module Helper
       )
     else
       Appium::TouchAction.swipe(
-        **get_options(from, dirs[0]),
-        **get_options(from, dirs[1]),
+        **get_options(from, "screen_center"),
+        **get_options(from, direction),
         duration: params[:timeout],
       )
     end
