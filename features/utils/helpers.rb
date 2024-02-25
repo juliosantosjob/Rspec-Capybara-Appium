@@ -53,7 +53,7 @@ module Helper
     end
   end
 
-  def find_element_by_platform(**args)
+  def find_element_by_platform(args)
     begin
       platform = ENV["PLATFORM"].downcase
       if platform.include?("android")
