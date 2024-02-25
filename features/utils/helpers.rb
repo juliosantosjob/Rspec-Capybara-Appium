@@ -118,7 +118,7 @@ module Helper
   end
 
   def get_options(anchor_element, direction)
-    case direction.delete(" ")
+    case direction.downcase.delete(" ")
     when "element_from"
       return {
         start_x: anchor_element.location["x"] + anchor_element.size["width"] / 2,
