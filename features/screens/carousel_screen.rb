@@ -12,7 +12,7 @@ class CarouselScreen < BaseScreen
   def access_carousel_screen
     scroll_down = find_element_by_platform(
       type_and: :xpath, locator_and: "//android.widget.TextView[@content-desc='longPress']",
-      type_ios: :id, locator_ios: "slider_ios",
+      type_ios: :id, locator_ios: "slider_ios"
     )
 
     begin

@@ -41,7 +41,7 @@ module Helper
   end
 
   def get_screen_size
-    return Capybara.current_session.driver.appium_driver.window_size - 1
+    return $driver.window_size
   end
 
   def move_with_drag(locator_one, locator_two, timeout: 2500)
@@ -101,34 +101,33 @@ module Helper
       raise ArgumentError, "\"direction\" is a required parameter for using the [do_a_swipe]."
     end
 
-    
-    if params.include?("->")
-      dirs = direction.split("->")
+    dirs = direction.split("->")
+    if to
       Appium::TouchAction.swipe(
         **get_options(from, dirs[0]),
-        **get_options(from, dirs[1]),
+        **get_options(from, to),
         duration: params[:timeout],
       )
     else
       Appium::TouchAction.swipe(
-        **get_options(from, "screen_center"),
-        **get_options(from, direction),
+        **get_options(from, dirs[0]),
+        **get_options(from, dirs[1]),
         duration: params[:timeout],
       )
     end
   end
 
   def get_options(anchor_element, direction)
-    case direction.delete(" ").downcase
+    case direction.delete(" ")
     when "element_from"
       return {
         start_x: anchor_element.location["x"] + anchor_element.size["width"] / 2,
         start_y: anchor_element.location["y"] + anchor_element.size["height"] / 2
       }
-    when "element_to"
+    when "to"
       return {
-        end_x: anchor_element.location["x"] + to.size["width"] / 2,
-        end_y: anchor_element.location["y"] + to.size["height"] / 2
+        end_x: to.location["x"] + to.size["width"] / 2,
+        end_y: to.location["y"] + to.size["height"] / 2
       }
     when "screen_center"
       return {
