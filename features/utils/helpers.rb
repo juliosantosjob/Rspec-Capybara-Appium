@@ -101,11 +101,12 @@ module Helper
       raise ArgumentError, "\"direction\" is a required parameter for using the [do_a_swipe]."
     end
 
-    dirs = direction.split("->")
-    if to
+    
+    if params.include?("->")
+      dirs = direction.split("->")
       Appium::TouchAction.swipe(
         **get_options(from, dirs[0]),
-        **get_options(from, to),
+        **get_options(from, dirs[1]),
         duration: params[:timeout],
       )
     else
