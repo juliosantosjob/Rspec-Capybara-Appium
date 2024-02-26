@@ -2,11 +2,25 @@ require_relative "../support/capy"
 require_relative "../support/hooks"
 
 module Helper
+  def get_path(path)
+    platform = ENV["PLATFORM"].downcase
+    if platform.include?("android")
+      return YAML.load_file(path)["android"]
+    elsif platform.include?("ios")
+      return YAML.load_file(path)["android"]
+    end
+  end
+
+  def new_find(locator)
+    locators = locator.split(":")
+    return find(locators[0].to_sym, locators[1])
+  end
+
   def wait_for_element(locator, timeout = 10)
     init = 0
     until init == timeout
       begin
-        break if locator.visible? == true
+        break if new_find(locator).visible? == true
       rescue
         raise ArgumentError, "Unable to find the element #{locator} in #{timeout * 10} secs" if init == timeout - 1
       end
@@ -17,7 +31,7 @@ module Helper
   def wait_and_tap(locator, timeout = 10)
     wait_for_element(locator, timeout)
     begin
-      locator.click
+      new_find(locator).click
     rescue => e
       raise ArgumentError, "Unable to click on element. Original error: #{e.message}"
     end

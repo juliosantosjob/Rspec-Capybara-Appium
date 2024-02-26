@@ -5,28 +5,29 @@ require_relative "../utils/helpers"
 class LoginScreen < BaseScreen
   include Helper
 
-  element :btn_login, "accessibility_id:login", "locator:ios"
-  element :fld_username, "accessibility_id:username", "locator:ios"
-  element :fld_password, "accessibility_id:password", "locator:ios"
-  element :fld_samples_list, "xpath://*[contains(@text,'Samples List')]", "locator:ios"
-  element :msg_error, "xpath:(//android.widget.TextView)[2]", "locator:ios"
+  def initialize
+    @locators = get_path("features/locators/login.yml")
+  end
 
   def go_app
-    assert_visible(btn_login)
+    expect(new_find(@locators["btn_login"]).visible?).to be_truthy
   end
 
   def fill(username, password)
-    fill_value(fld_username, username)
-    fill_value(fld_password, password)
-    wait_and_tap(btn_login, 5)
+    new_find(@locators["fld_username"]).set(username)
+    new_find(@locators["fld_password"]).set(password)
+    wait_and_tap(@locators["btn_login"])
   end
 
   def at_home
-    assert_visible(fld_samples_list)
+    list_home = new_find(@locators["fld_samples_list"])
+    expect(list_home.visible?).to be_truthy
   end
 
   def error_msg(msg)
-    assert_text(msg_error, msg)
-    assert_visible(msg_error)
+    error = new_find(@locators["msg_error"])
+
+    expect(error.text).to eq(msg)
+    expect(error.visible?).to be_truthy
   end
 end

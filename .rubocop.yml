@@ -75,3 +75,6 @@ convention:Metrics/ModuleLength:
 
 Layout/FirstHashElementIndentation:
   Enabled: false
+
+warning:Lint/MissingSuper:
+  Enabled: false 
