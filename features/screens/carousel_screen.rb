@@ -2,38 +2,35 @@ require_relative "../support/capy"
 require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class CarouselScreen < BaseScreen
+class CarouselScreen
   include Helper
 
-  element :btn_carousel, "xpath://android.widget.TextView[@content-desc='carousel']", "locator:ios"
-  element :fld_title_carousel, "xpath://android.widget.TextView[@text='Carousel - Swipe left/right']", "locator:ios"
-  element :fld_view_three, "xpath://*[@text='3']", "locator:ios"
+  def initialize
+    @carousel_elements = load_elements("features/locators/carousel.yml")
+  end
 
   def access_carousel_screen
-    scroll_down = find_element_by_platform(
-      type_and: :xpath, locator_and: "//android.widget.TextView[@content-desc='longPress']",
-      type_ios: :id, locator_ios: "slider_ios"
-    )
+    scroll_down = find_element_by_appium(@carousel_elements["fld_scroll"])
+    btn_carousel = find_element(@carousel_elements["btn_carousel"])
 
     begin
-      condition_element = assert_visible(btn_carousel)
+      condition_element = btn_carousel.visible? == true
     rescue
       condition_element = false
     end
 
     do_a_swipe({ from: scroll_down, direction: "element_from -> screen_down", timeout: 1000 }) unless condition_element
+    wait_and_tap(@carousel_elements["btn_carousel"])
 
-    wait_and_tap(btn_carousel, 5)
-    assert_visible(fld_title_carousel)
+    fld_title = find_element(@carousel_elements["fld_title_carousel"])
+    expect(fld_title.visible?).to be_truthy
   end
 
   def spin_the_carousel_ok
-    views = find_element_by_platform(
-      type_and: :xpath, locator_and: "//android.widget.TextView[@text='1']",
-      type_ios: :id, locator_ios: "slider_ios",
-    )
-
+    views = find_element_by_appium(@carousel_elements["fld_views"])
     do_a_swipe({ from: views, direction: "element_from -> screen_right", timeout: 500 })
-    assert_visible(fld_view_three)
+
+    fld_title = find_element(@carousel_elements["fld_view_three"])
+    expect(fld_title.visible?).to be_truthy
   end
 end

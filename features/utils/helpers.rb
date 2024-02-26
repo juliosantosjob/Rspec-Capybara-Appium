@@ -2,25 +2,36 @@ require_relative "../support/capy"
 require_relative "../support/hooks"
 
 module Helper
-  def get_path(path)
-    platform = ENV["PLATFORM"].downcase
-    if platform.include?("android")
-      return YAML.load_file(path)["android"]
-    elsif platform.include?("ios")
-      return YAML.load_file(path)["android"]
+  def load_elements(path)
+    begin
+      platform = ENV["PLATFORM"].downcase
+      if platform.include?("android")
+        return YAML.load_file(path)["android"]
+      elsif platform.include?("ios")
+        return YAML.load_file(path)["android"]
+      else
+        raise ArgumentError, "Wrong Platform name"
+      end
+    rescue 
+      raise ArgumentError, "path #{path} not found"
     end
   end
 
-  def new_find(locator)
+  def find_element(locator)
     locators = locator.split(":")
     return find(locators[0].to_sym, locators[1])
+  end
+
+  def find_element_by_appium(locator)
+    locators = locator.split(":")
+    return $driver.find_element(locators[0].to_sym, locators[1])
   end
 
   def wait_for_element(locator, timeout = 10)
     init = 0
     until init == timeout
       begin
-        break if new_find(locator).visible? == true
+        break if find_element(locator).visible? == true
       rescue
         raise ArgumentError, "Unable to find the element #{locator} in #{timeout * 10} secs" if init == timeout - 1
       end
@@ -31,16 +42,16 @@ module Helper
   def wait_and_tap(locator, timeout = 10)
     wait_for_element(locator, timeout)
     begin
-      new_find(locator).click
+      find_element(locator).click
     rescue => e
       raise ArgumentError, "Unable to click on element. Original error: #{e.message}"
     end
   end
 
   def fill_value(locator, text)
+    wait_for_element(locator)
     begin
-      wait_for_element(locator)
-      locator.set(text)
+      find_element(locator).set(text)
     rescue => e
       raise ArgumentError, "Unable filling element. #{e.message}"
     end
@@ -64,22 +75,6 @@ module Helper
         .new.long_press(element: locator_one).wait(timeout).move_to(element: locator_two).release.perform
     rescue => e
       raise ArgumentError, "Unable to move the element: #{e.message}"
-    end
-  end
-
-  def find_element_by_platform(args)
-    begin
-      platform = ENV["PLATFORM"].downcase
-      if platform.include?("android")
-        return $driver.find_element(args[:type_and], args[:locator_and])
-      elsif platform.include?("ios")
-        return $driver.find_element(args[:type_ios], args[:locator_ios])
-      else
-        raise ArgumentError, "Platform not supported: #{platform}"
-      end
-    rescue
-      raise ArgumentError, "Unable to find the element with locator: " \
-            "\"#{platform.include?("android") ? args[:locator_and] : args[:locator_ios]}\""
     end
   end
 

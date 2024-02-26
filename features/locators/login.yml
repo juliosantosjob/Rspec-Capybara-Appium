@@ -10,4 +10,4 @@ ios:
   fld_username: "locator:ios"
   fld_password: "locator:ios"
   fld_samples_list: "locator:ios"
-  msg_error: "locator:ios"  
+  msg_error: "locator:ios"
