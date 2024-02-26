@@ -2,17 +2,19 @@ require_relative "../support/capy"
 require_relative "../support/hooks"
 
 module Helper
+  include Capybara::DSL
+
   def load_elements(path)
     begin
       platform = ENV["PLATFORM"].downcase
       if platform.include?("android")
         return YAML.load_file(path)["android"]
       elsif platform.include?("ios")
-        return YAML.load_file(path)["android"]
+        return YAML.load_file(path)["ios"]
       else
         raise ArgumentError, "Wrong Platform name"
       end
-    rescue 
+    rescue
       raise ArgumentError, "path #{path} not found"
     end
   end
