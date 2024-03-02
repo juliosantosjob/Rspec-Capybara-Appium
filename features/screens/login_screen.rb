@@ -10,9 +10,9 @@ class LoginScreen
   end
 
   def fill(username, password)
-    fill_value($login_elements["fld_username"], username)
-    fill_value($login_elements["fld_password"], password)
-    wait_and_tap($login_elements["btn_login"])
+    find_element($login_elements["fld_username"]).set(username)
+    find_element($login_elements["fld_password"]).set(password)
+    find_element($login_elements["btn_login"]).click
   end
 
   def at_home

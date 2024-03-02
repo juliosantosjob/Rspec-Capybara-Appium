@@ -1,0 +1,19 @@
+android: 
+  btn_vertical_swiping: "xpath://android.widget.TextView[@content-desc='verticalSwipe']"
+  fld_title_vertical_swiping: "xpath://*[contains(@text,'Vertical swiping')]"
+  fld_csharp: "xpath://*[@text=' C#']"
+  fld_framework: 
+    my_sql: "xpath://android.widget.TextView[@text=' MySql']"
+    appium: "xpath://android.widget.TextView[@text=' Appium']"
+    jest: "xpath://android.widget.TextView[@text=' Jest']"
+    karma: "xpath://android.widget.TextView[@text=' Karma']"
+
+ios: 
+  btn_vertical_swiping: "predicated:ios"
+  fld_title_vertical_swiping: "predicated:ios"
+  fld_csharp: "predicated:ios"
+  fld_framework: 
+    my_sql: "predicated:MySql"
+    appium: "predicated:Appium"
+    jest: "predicated:Jest"
+    karma: "predicated:Karma"

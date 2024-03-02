@@ -20,7 +20,7 @@ end
 Capybara.configure do |config|
   include RSpec::Matchers
   config.default_driver = :appium
-  # config.default_max_wait_time = 5
+  config.default_max_wait_time = 10
 end
 
 RSpec.configure do |config|

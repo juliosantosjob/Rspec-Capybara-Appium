@@ -1,0 +1,13 @@
+android: 
+  btn_login: "accessibility_id:login"
+  fld_username: "accessibility_id:username"
+  fld_password: "accessibility_id:password"
+  fld_samples_list: "xpath://*[contains(@text,'Samples List')]"
+  msg_error: "xpath:(//android.widget.TextView)[2]"
+
+ios: 
+  btn_login: "predicated:ios"
+  fld_username: "predicated:ios"
+  fld_password: "predicated:ios"
+  fld_samples_list: "predicated:ios"
+  msg_error: "predicated:ios"

@@ -1,0 +1,13 @@
+android: 
+  btn_chained_view: "xpath://android.widget.TextView[@content-desc='chainedView']"
+  fld_title_native_view: "xpath://*[contains(@text,'Native View Demo')]"
+  fld_first_text_view: "xpath:(//android.widget.TextView[@content-desc='textView'])[1]"
+  fld_second_text_view: "xpath:(//android.widget.TextView[@content-desc='textView'])[2]"
+  fld_third_text_view: "xpath:(//android.widget.TextView[@content-desc='textView'])[3]"
+
+ios: 
+  btn_chained_view: "predicated:ios" 
+  fld_title_native_view: "predicated:ios" 
+  fld_first_text_view: "predicated:ios" 
+  fld_second_text_view: "predicated:ios"
+  fld_third_text_view: "predicated:ios"

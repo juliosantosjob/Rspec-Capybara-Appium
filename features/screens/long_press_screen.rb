@@ -1,30 +1,25 @@
 require_relative "../support/capy"
-require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class LongPressScreen < BaseScreen
+class LongPressScreen
   include Helper
 
-  element :btn_long_press, "xpath://android.widget.TextView[@content-desc='longPress']", "locator:ios"
-  element :fld_title_long_press, "xpath://android.widget.TextView[@text='Long Press Demo']", "locator:ios"
-  element :msg_ok, "xpath:(//android.widget.TextView)[2]", "locator:ios"
-
   def access_long_press_screen
-    wait_and_tap(btn_long_press, 5)
-    assert_visible(fld_title_long_press)
+    find_element($long_press_elements["btn_long_press"]).click
+
+    title = find_element($long_press_elements["fld_title_long_press"])
+    expect(title.visible?).to be_truthy
   end
 
   def do_a_long_press
-    button_lps = find_element_by_platform(
-      type_and: :accessibility_id, locator_and: "longpress",
-      type_ios: :id, locator_ios: "longpress_ios"
-    )
-
+    button_lps = find_by_appium($long_press_elements["fld_long_press"])
     long_press(button_lps)
   end
 
   def long_press_message(msg)
-    assert_text(msg_ok, msg)
-    assert_visible(msg_ok)
+    get_msg = find_element($long_press_elements["msg_ok"])
+
+    expect(get_msg.text).to eq(msg)
+    expect(get_msg.visible?).to be_truthy
   end
 end

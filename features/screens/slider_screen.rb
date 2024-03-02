@@ -1,38 +1,28 @@
 require_relative "../support/capy"
-require_relative "../support/base_screen"
 require_relative "../utils/helpers"
 
-class SliderScreen < BaseScreen
+class SliderScreen
   include Helper
 
-  element :btn_slider, "xpath://android.widget.TextView[@content-desc='slider1']", "locator:ios"
-  element :fld_title_slider, "xpath://*[contains(@text,'Slider')]", "locator:ios"
-  element :fld_end_slider, "xpath:(//*[@text='100'])[2]", "locator:ios"
-
   def access_slider_screen
-    wait_and_tap(btn_slider, 5)
-    assert_visible(fld_title_slider)
+    find_element($slider_elements["btn_slider"]).click
+
+    title = find_element($slider_elements["fld_title_slider"])
+    expect(title.visible?).to be_truthy
   end
 
   def swipe_one
-    slider_one = find_element_by_platform(
-      type_and: :accessibility_id, locator_and: "slider",
-      type_ios: :id, locator_ios: "slider_ios",
-    )
-
+    slider_one = find_by_appium($slider_elements["fld_slider"])
     do_a_swipe({ from: slider_one, direction: "element_from -> screen_right", timeout: 2000 })
   end
 
   def swipe_two
-    slider_two = find_element_by_platform(
-      type_and: :accessibility_id, locator_and: "slider1",
-      type_ios: :id, locator_ios: "slider_ios",
-    )
-
+    slider_two = find_by_appium($slider_elements["fld_slider_one"])
     do_a_swipe({ from: slider_two, direction: "element_from -> screen_right", timeout: 2000 })
   end
 
   def end_of_slide
-    assert_visible(fld_end_slider)
+    end_of_slider = find_element($slider_elements["fld_end_slider"])
+    expect(end_of_slider.visible?).to be_truthy
   end
 end

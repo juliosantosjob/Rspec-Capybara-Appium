@@ -24,7 +24,7 @@ module Helper
     return find(locators[0].to_sym, locators[1])
   end
 
-  def find_element_by_appium(locator)
+  def find_by_appium(locator)
     locators = locator.split(":")
     return $driver.find_element(locators[0].to_sym, locators[1])
   end
@@ -48,23 +48,6 @@ module Helper
     rescue => e
       raise ArgumentError, "Unable to click on element. Original error: #{e.message}"
     end
-  end
-
-  def fill_value(locator, text)
-    wait_for_element(locator)
-    begin
-      find_element(locator).set(text)
-    rescue => e
-      raise ArgumentError, "Unable filling element. #{e.message}"
-    end
-  end
-
-  def assert_visible(locator)
-    raise ArgumentError, "Element is not visible." unless expect(locator.visible?).to be_truthy
-  end
-
-  def assert_text(locator, text)
-    raise ArgumentError, "Element text does not match expected text." unless expect(locator.text).to eq(text)
   end
 
   def get_screen_size

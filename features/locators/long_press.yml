@@ -1,0 +1,11 @@
+android: 
+  btn_long_press: "xpath://android.widget.TextView[@content-desc='longPress']"
+  fld_title_long_press: "xpath://android.widget.TextView[@text='Long Press Demo']"
+  fld_long_press: "accessibility_id:longpress"
+  msg_ok: "xpath:(//android.widget.TextView)[2]"
+  
+ios: 
+  btn_long_press: "predicated:ios"
+  fld_title_long_press: "predicated:ios"
+  fld_long_press: "predicated:ios"
+  msg_ok: "predicated:ios"

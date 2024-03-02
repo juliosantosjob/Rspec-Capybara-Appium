@@ -1,0 +1,13 @@
+android: 
+  btn_slider: "xpath://android.widget.TextView[@content-desc='slider1']"
+  fld_title_slider: "xpath://*[contains(@text,'Slider')]"
+  fld_end_slider: "xpath:(//*[@text='100'])[2]"
+  fld_slider: "accessibility_id:slider"
+  fld_slider_one: "accessibility_id:slider1"
+
+ios: 
+  btn_slider: "predicated:ios"
+  fld_title_slider: "predicated:ios"
+  fld_end_slider: "predicated:ios"
+  fld_slider: "predicated:ios"
+  fld_slider_one: "predicated:ios"

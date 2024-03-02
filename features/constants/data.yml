@@ -6,9 +6,3 @@ views:
   first_view: "Hello World, I'm View one"
   second_view: "Hello World, I'm View two"
   third_view: "Hello World, I'm View three"
-
-technologies:
-  one: "MySql"
-  two: "Appium"
-  three: "Jest"
-  four: "Karma"
