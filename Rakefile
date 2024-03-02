@@ -15,12 +15,6 @@ task :run, [:platform, :tag] do |task, args|
   sh "rspec features/specs #{args.tag.nil? ? "" : "-t #{args.tag}"}"
 end
 
-desc "Donwload hash app"
-task :get_hash do
-  sh "ruby features/support/get_hash.rb"
-end
-
-
 desc "Auto-correct Ruby code style"
 task :rubo do
   sh "rubocop --auto-correct"
