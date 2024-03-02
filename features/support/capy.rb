@@ -1,7 +1,6 @@
 require "rspec"
 require "rspec/retry"
 require "appium_capybara"
-require "site_prism"
 require "yaml"
 require "allure-rspec"
 require "rubocop"
