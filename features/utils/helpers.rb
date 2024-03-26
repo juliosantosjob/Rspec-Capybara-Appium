@@ -1,5 +1,6 @@
 require_relative "../support/capy"
 require_relative "../support/hooks"
+require "capybara/dsl"
 
 module Helper
   include Capybara::DSL
