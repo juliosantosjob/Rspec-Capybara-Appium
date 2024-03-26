@@ -3,8 +3,8 @@ name: Pipe
 on:
   push:
   pull_request:
-    branches:
-      # - main
+    # branches:
+    # - main
 
 jobs:
   tests-e2e:
